@@ -21,10 +21,14 @@
   <% end %>
 </div>
 
-<div class="form">
-  <%= simple_form_for [@item, @offering] do |f| %>
-      <%= f.input :posted, collection: current_user.items%>
-      <%= f.submit class: 'btn btn-flat' %>
-      <% end %>
-      </div>
-</div>
+<% if user_signed_in? %>
+  <div class="form">
+    <%= simple_form_for [@item, @offering] do |f| %>
+        <%= f.input :posted, collection: current_user.items%>
+        <%= f.submit class: 'btn btn-flat' %>
+        <% end %>
+        </div>
+  </div>
+<% else %>
+  <%= link_to "Sign in to offer",  new_user_session_path %>
+<% end %>
