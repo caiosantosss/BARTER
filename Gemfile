@@ -29,6 +29,8 @@ gem 'redis', '~> 4.0'
 gem 'bootsnap', '>= 1.4.2', require: false
 
 gem 'devise'
+gem 'cloudinary', '~> 1.16.1'
+gem 'faker', :git => 'https://github.com/faker-ruby/faker.git', :branch => 'master'
 
 gem 'autoprefixer-rails', '10.2.5'
 gem 'font-awesome-sass'
