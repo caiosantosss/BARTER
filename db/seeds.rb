@@ -26,13 +26,20 @@ puts 'Creating Users and Items'
     password: '123456'
   )
   user.save!
+
+  puts 'Creating items with photos, it might take a while.....'
+
   5.times do
+    item_name = Faker::House.furniture
     item = Item.create!(
-      name: Faker::House.furniture,
+      name: item_name,
       description: Faker::Lorem.paragraph,
       user: user
     )
+    file = URI.open("http://source.unsplash.com/featured/?#{item_name}&#{rand(1000)}")
+    item.photo.attach(io: file, filename: 'item.png', content_type: 'image/png')
   end
+
 end
 
 puts 'User and items created'
