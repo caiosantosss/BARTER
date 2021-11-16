@@ -1,4 +1,17 @@
-<h1>Homepage</h1>
+<%# Banner %>
+<div class="banner" style="background-image: linear-gradient(rgba(0,0,0,0.4),rgba(0,0,0,0.4)), url(https://images.unsplash.com/photo-1624564890916-2669288b9f16?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=2070&q=80);">
+<h1>Welcome</h1>
+</div>
+
+
+<div class="content-container">
+  <%# make search bar %>
+  <div>
+    <p>search bar</p>
+  </div>
+
+  
 <% @items.each do |item| %>
   <p><%= item.name %></p>
 <% end %>
+</div>
