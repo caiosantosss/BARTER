@@ -3,7 +3,7 @@ class Item < ApplicationRecord
   has_many :offerings
   has_one_attached :photo
   validates :name, presence: true
-  validates :description, presense: true, length: {
+  validates :description, presence: true, length: {
     minimum: 4,
     maximum: 299,
     tokenizer: lambda { |str| str.scan(/\s+/) },
