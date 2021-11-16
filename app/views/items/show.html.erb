@@ -1,7 +1,11 @@
-<div class = "container">
-  <div class="card" style = "background-image:url(<%= @item.photo.attached? ? cl_image_path(@item.photo.key) : "" %>)">
-  <h1><%= @item.name %></h1>
-  <h3><%= @item.description %></h3>
-  <%= link_to 'Offer', new_item_offering_path %>
+<div class="card-item-picture">
+   <img class="card-img-top" style = "background-image:linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)),url(<%= @item.photo.attached? ? cl_image_path(@item.photo.key) : "" %>)">
+  <div class="card-item-info">
+    <div>
+      <h2><%= @item.name %></h2>
+      <p><%= @item.description %></p>
+       <%= link_to 'Offer', new_item_offering_path(@item), class: 'btn btn-flat' %>
+    </div>
+  </div>
 </div>
-</div>
+<%# Why I cant get the photo? %>
