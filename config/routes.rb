@@ -7,4 +7,6 @@ Rails.application.routes.draw do
   end
 
   resources :offerings, only: [:edit, :update]
+
+  devise_for :users
 end
