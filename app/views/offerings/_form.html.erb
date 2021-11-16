@@ -1,9 +1,6 @@
 <%= simple_form_for [@item, @offering] do |f| %>
   <%= f.input_field :offered_id,
-  collection: @user.items.map {|item| item.name },
-  include_blank: '(All)',
-  selected: [''],
-  as: :check_boxes %>
+  collection: @user.items.map {|item| [item.name, item.id] }  %>
   <%=f.button :submit, label: 'Confirm' %>
 <% end %>
 
