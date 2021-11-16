@@ -2,7 +2,6 @@
   <%= f.input_field :offered_id,
   collection: @user.items.map {|item| [cl_image_tag(item.photo.key, width: 300, height: 200, crop: :scale)] }%>
   <%# include_blank: '(All)', %>
-  <%= multiple: true, %>
   <%# selected: [''], %>
   <%= as: :check_boxes %>
   <%= f.button :submit, label: 'Confirm' %>
