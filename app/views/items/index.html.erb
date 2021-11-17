@@ -12,23 +12,21 @@
 
 
 <% @items.each do |item| %>
-  <p><%= item.name %></p>
-<% end %>
-</div>
-
-<div class="container">
-  <div class="card">
-    <div class="imgBx">
-      <img src="" alt="">
-      <ul class="action">
-        <li><i class="far fa-bookmark"></i></li>
-        <span>Add to Bookmark</span>
-      </ul>
-    </div>
-    <div class="content">
-      <div class="productName">
-        <h3><%= item.name %></h3>
+  <div class="container">
+    <div class="card">
+      <div class="imgBx">
+        <img src="" alt="">
+        <ul class="action">
+          <li><i class="far fa-bookmark"></i></li>
+          <span>Add to Bookmark</span>
+        </ul>
+      </div>
+      <div class="content">
+        <div class="productName">
+          <h3><%= item.name %></h3>
+        </div>
       </div>
     </div>
   </div>
+<% end %>
 </div>
