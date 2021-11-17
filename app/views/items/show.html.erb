@@ -14,11 +14,13 @@
 <%# if item-offering include item-id then display  all of them%>
 
 <div class="container">
-  <% @item.offered_offerings.each do |offering| %>
-  <%# <% offering = Offering.find_by(item: @item, movie: movie) %>
-   <h4><%= offering.offered.name %></h4>
-   <p><%= offering.offered.description %></p>
+<div class="row justify-content-center">
+    <% @item.offered_offerings.each do |offering| %>
+    <%# <% offering = Offering.find_by(item: @item, movie: movie) %>
+    <h4><%= offering.offered.name %></h4>
+    <p><%= offering.offered.description %></p>
   <% end %>
+  </div>
 </div>
 
 <% if user_signed_in? %>
