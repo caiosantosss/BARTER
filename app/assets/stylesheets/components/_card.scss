@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 // might need
 
 // * {
@@ -125,4 +126,37 @@
     color: rgb(0, 0, 0);
     margin: 5px 0;
   }
+=======
+.card-item-picture {
+  overflow: hidden;
+  background: white;
+  box-shadow: 0 0 15px rgba(0,0,0,0.2);
+}
+
+.card-item-picture > img {
+  height: 200px;
+  width: 100%;
+  object-fit: cover;
+}
+
+.card-item-picture h2 {
+  font-size: 16px;
+  font-weight: bold;
+  margin: 0;
+}
+
+.card-item-picture p {
+  font-size: 12px;
+  opacity: .7;
+  margin: 0;
+}
+
+
+.card-item-picture .card-trip-infos {
+  padding: 16px;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  position: relative;
+>>>>>>> 7cc19cfa7991150e9b74a2c352e6358d2f94e153
 }
