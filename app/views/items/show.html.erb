@@ -1,5 +1,5 @@
 <div class="container">
-  <div class="d-flex">
+  <div class="d-flex mt-4">
     <div class="card-trip w-100">
       <%= @item.photo.attached? ? cl_image_tag(@item.photo.key) : "" %>
       <div class="card-trip-infos">
@@ -28,7 +28,6 @@
 <div class = "offered-header">
   <h4>What was offered on this product </h4>
 </div>
-
 <% @item.offered_offerings.each do |offering| %>
   <div class="offerings">
     <div class='offering-image'><%= cl_image_tag offering.offered.photo.key, height: 100, width: 200, crop: :fill  %></div>
