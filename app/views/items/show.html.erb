@@ -34,8 +34,18 @@
     <h4><%= offering.offered.name %></h4>
     <p><%= offering.offered.description %></p>
   <% end %>
-  <%= link_to 'Create New Item', new_item_path %>
 </div>
-<%# Some changes were made  %>
-<%# collection: current_user.items.map {|item| [cl_image_tag(item.photo.key, width: 300, height: 200, crop: :scale), item.id] } %>
-<%# <%= cl_image_tag @item.photo.key, height: 300, width: 400, crop: :fill %>
+
+<% if user_signed_in? %>
+  <%= link_to 'Create New Item', new_item_path %>
+  <div class="form">
+    <%= simple_form_for [@item, @offering] do |f| %>
+        <%= f.association :offered, label: 'Choose an item to offer:', collection: current_user.items.map {|item| [item.name, item.id]}, error: 'You must choose an item to offer!'%>
+        <%= f.submit class: 'btn btn-flat', value: 'Make an Offer', data: { disable_with: false }%>
+        <% end %>
+        </div>
+  </div>
+<% else %>
+  <div><%= link_to "Sign in to offer",  new_user_session_path %></div>
+<% end %>
+
