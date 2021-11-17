@@ -7,7 +7,7 @@
   font-family: 'Poppins', sans-serif;
 }
 
-.card-body {
+.item-card-body {
   display: flex;
   justify-content: center;
   align-content: center;
@@ -23,13 +23,14 @@
   gap: 20px;
   padding: 20px;
 
-  .card {
+  .item-card {
     width: 100%;
     background: rgb(255, 255, 255);
+    border-radius: 2px;
   }
 }
 
-.card .imgBx {
+.item-card .imgBx {
   position: relative;
   width: 100%;
   height: 310px;
@@ -47,7 +48,7 @@
   }
 }
 
-.card:hover .imgBx img {
+.item-card:hover .imgBx img {
   transform: scale(1.5);
 }
 
@@ -78,7 +79,7 @@ li:hover {
   color: rgb(255, 255, 255);
 }
 
-.card:hover .action li {
+.item-card:hover .action li {
   transform: translateY(0px);
 }
 
@@ -115,7 +116,7 @@ li:hover {
   transform: translateY(-50%) rotate(45deg);
 }
 
-.card .content {
+.item-card .item-content {
   padding: 10px;
 
   // h3
