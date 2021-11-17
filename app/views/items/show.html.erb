@@ -24,7 +24,7 @@
 <% if user_signed_in? %>
   <div class="form">
     <%= simple_form_for [@item, @offering] do |f| %>
-        <%= f.association :offered, label: 'Choose an item to offer:', collection: current_user.items.map {|item| [item.name, item.id]}%>
+        <%= f.association :offered, label: 'Choose an item to offer:', collection: current_user.items.map {|item| [item.name, item.id]}, error: 'You must choose an item to offer!'%>
         <%= f.submit class: 'btn btn-flat', value: 'Make an Offer', data: { disable_with: false }%>
         <% end %>
         </div>

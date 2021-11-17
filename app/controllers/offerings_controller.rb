@@ -9,8 +9,18 @@ class OfferingsController < ApplicationController
 
   def create
     @item = Item.find(params[:item_id])
-    offered_item = Item.find(params[:offering][:offered_id])
+    # if params[:offering][:offered_id] == ''
+    #   @offering = Offering.new(offering_params)
+    # else
+    #   offered_item = Item.find(params[:offering][:offered_id])
+    #   @offering = Offering.new(offering_params)
+    #   @offering.offered = offered_item
+    #   @offering.posted = @item
+    # end
     @offering = Offering.new(offering_params)
+    offered_item = params[:offering][:offered_id] == '' ? nil : Item.find(params[:offering][:offered_id])
+
+    # offered_item = Item.find(params[:offering][:offered_id])
     @offering.offered = offered_item
     @offering.posted = @item
     authorize @offering
@@ -18,8 +28,8 @@ class OfferingsController < ApplicationController
     if @offering.save
       redirect_to item_path(@item)
     else
-      redirect_to root_path
-      # redirect_back(fallback_location: root_path)
+      # redirect_to root_path
+      render 'items/show'
     end
   end
 
