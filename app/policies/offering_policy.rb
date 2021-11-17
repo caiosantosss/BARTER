@@ -5,19 +5,19 @@ class OfferingPolicy < ApplicationPolicy
     end
   end
 
-    def new?
-      true
-    end
+  def new?
+    true
+  end
 
-    def create?
-      record.posted.user != user
-    end
+  def create?
+    record.posted.user != user
+  end
 
-    # def edit?
-    #   record.offered.user == user || record.posted.user == user
-    # end
+  # def edit?
+  #   record.offered.user == user || record.posted.user == user
+  # end
 
-    # def update?
-    #   record.offered.user == user || record.posted.user == user
-    # end
+  # def update?
+  #   record.offered.user == user || record.posted.user == user
+  # end
 end

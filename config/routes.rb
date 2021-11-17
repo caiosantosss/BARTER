@@ -3,7 +3,7 @@ Rails.application.routes.draw do
   root to: 'items#index'
   get '/dashboard', to: 'users#index'
   resources :items, only: [:show, :new, :create] do
-    resources :offerings, only: [:new, :create]
+    resources :offerings, only: [:create]
   end
 
   resources :offerings, only: [:edit, :update]
