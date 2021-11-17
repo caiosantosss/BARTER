@@ -17,7 +17,7 @@
         <% end %>
       </div>
     <% else %>
-      <%= link_to "Sign in to offer",  new_user_session_path %>
+      <div><%= link_to "Sign in to offer",  new_user_session_path %></div>
     <% end %>
   </div>
 </div>
@@ -35,17 +35,3 @@
     <p><%= offering.offered.description %></p>
   <% end %>
 </div>
-
-<% if user_signed_in? %>
-  <%= link_to 'Create New Item', new_item_path %>
-  <div class="form">
-    <%= simple_form_for [@item, @offering] do |f| %>
-        <%= f.association :offered, label: 'Choose an item to offer:', collection: current_user.items.map {|item| [item.name, item.id]}, error: 'You must choose an item to offer!'%>
-        <%= f.submit class: 'btn btn-flat', value: 'Make an Offer', data: { disable_with: false }%>
-        <% end %>
-        </div>
-  </div>
-<% else %>
-  <div><%= link_to "Sign in to offer",  new_user_session_path %></div>
-<% end %>
-
