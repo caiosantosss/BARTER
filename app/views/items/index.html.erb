@@ -9,24 +9,27 @@
   <div>
     <p>search bar</p>
   </div>
+</div>
 
 
-<% @items.each do |item| %>
-  <div class="container">
-    <div class="card">
-      <div class="imgBx">
-        <img src="" alt="">
-        <ul class="action">
-          <li><i class="far fa-bookmark"></i></li>
-          <span>Add to Bookmark</span>
-        </ul>
-      </div>
-      <div class="content">
-        <div class="productName">
-          <h3><%= item.name %></h3>
+<div class="card-body">
+  <div class="card-container">
+    <% @items.each do |item| %>
+      <div class="card">
+        <div class="imgBx">
+          <%= cl_image_tag(item.photo.key) %>
+          <ul class="action">
+            <li><i class="far fa-bookmark"></i></li>
+            <span>Add to Bookmark</span>
+          </ul>
+        </div>
+        <div class="content">
+          <div class="productName">
+            <h3><%= item.name %></h3>
+          </div>
         </div>
       </div>
-    </div>
+    <% end %>
   </div>
 <% end %>
 </div>

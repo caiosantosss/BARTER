@@ -47,10 +47,12 @@ ActiveRecord::Schema.define(version: 2021_11_16_030213) do
 
   create_table "offerings", force: :cascade do |t|
     t.integer "status", default: 0
-    t.integer "offered_id", null: false
-    t.integer "posted_id", null: false
+    t.bigint "posted_id", null: false
+    t.bigint "offered_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.index ["offered_id"], name: "index_offerings_on_offered_id"
+    t.index ["posted_id"], name: "index_offerings_on_posted_id"
   end
 
   create_table "users", force: :cascade do |t|
@@ -70,4 +72,6 @@ ActiveRecord::Schema.define(version: 2021_11_16_030213) do
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "items", "users"
+  add_foreign_key "offerings", "items", column: "offered_id"
+  add_foreign_key "offerings", "items", column: "posted_id"
 end
