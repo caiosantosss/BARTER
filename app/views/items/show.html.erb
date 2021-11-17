@@ -22,8 +22,8 @@
   </div>
 </div>
 <%# Some changes were made  %>
-<%= link_to 'Create New Item', new_item_path %>
 <% if user_signed_in? %>
+  <%= link_to 'Create New Item', new_item_path %>
   <div class="form">
     <%= simple_form_for [@item, @offering] do |f| %>
         <%= f.association :offered, label: 'Choose an item to offer:', collection: current_user.items.map {|item| [item.name, item.id]}, error: 'You must choose an item to offer!'%>
@@ -32,5 +32,5 @@
         </div>
   </div>
 <% else %>
-  <%= link_to "Sign in to offer",  new_user_session_path %>
+  <div><%= link_to "Sign in to offer",  new_user_session_path %></div>
 <% end %>
