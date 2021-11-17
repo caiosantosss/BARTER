@@ -1,40 +1,37 @@
 <%# Banner %>
 <div class="banner" style="background-image: linear-gradient(rgba(0,0,0,0.4),rgba(0,0,0,0.4)), url(https://images.unsplash.com/photo-1624564890916-2669288b9f16?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=2070&q=80);">
-<h1>Welcome to Barter</h1>
-<h2>Just exchange it</h2>
- <div class="mask d-flex align-items-center h-100">
-      <div class="container">
-        <div class="card mask-custom p-2 mt-5">
-          <div class="card-body">
-            <div class="row justify-content-center">
-              <div class="col-md-6 mb-3 mb-md-0">
-                <div id="basic" class="form-outline form-white">
-                  <input type="text" id="form1" class="form-control" placeholder="What Item are you looking for?">
-                </div>
+  <h1>Welcome to Barter</h1>
+  <h2>Just exchange it</h2>
+  <div class="mask d-flex align-items-center h-100">
+    <div class="container">
+      <div class="card mask-custom p-2 mt-5">
+        <div class="card-body">
+          <div class="row justify-content-center">
+            <div class="col-md-6 mb-3 mb-md-0">
+              <div id="basic" class="form-outline form-white">
+                <input type="text" id="form1" class="form-control" placeholder="What Item are you looking for?">
               </div>
-              <div class="col-md-2">
-                <input class="btn btn-info btn-block" type="submit" value="Search" />
-              </div>
+            </div>
+            <div class="col-md-2">
+              <input class="btn btn-info btn-block" type="submit" value="Search" />
             </div>
           </div>
         </div>
       </div>
     </div>
+  </div>
 </div>
-
-
-  <%# make search bar %>
+<%# make search bar %>
 <div class="content-container">
-
 </div>
-
-
 <div class="item-card-body">
   <div class="card-container">
     <% @items.each do |item| %>
       <div class="item-card">
         <div class="imgBx">
-          <%= cl_image_tag(item.photo.key) %>
+          <%= link_to item_path(item) do%>
+            <%= cl_image_tag(item.photo.key) %>
+          <% end %>
           <ul class="action">
             <li><i class="far fa-bookmark"></i></li>
             <span>Add to Bookmark</span>
@@ -42,7 +39,7 @@
         </div>
         <div class="item-content">
           <div class="productName">
-            <%= link_to item.name.capitalize, item_path(item) %>
+            <%= link_to item.name.capitalize, item_path(item)%>
           </div>
         </div>
       </div>
