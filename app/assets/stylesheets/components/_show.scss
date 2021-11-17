@@ -1,9 +1,21 @@
 
 .offerings{
-  border: 1px solid gray;
+  // border: 1px solid gray;
   margin: 10px 10px;
   padding: 4px;
-
+  display: flex;
+  .offering-content {
+    flex-grow: 1;
+    padding-left: 10px;
+    border-top: 1px solid rgb(196, 195, 195);
+    border-bottom: 1px solid rgb(196, 195, 195);
+    border-right: 1px solid rgb(196, 195, 195);
+    // align-self: center;
+    h4 {
+      margin: 10px 0px;
+      font-weight: bold;
+    }
+  }
 }
 .offered-header{
   margin-left: 10px;

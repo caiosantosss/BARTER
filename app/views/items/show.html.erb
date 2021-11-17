@@ -4,7 +4,7 @@
       <%= @item.photo.attached? ? cl_image_tag(@item.photo.key) : "" %>
       <div class="card-trip-infos">
         <div>
-          <h2><%= @item.name %></h2>
+          <h2><%= @item.name.capitalize %></h2>
           <p> <%= @item.description %></p>
         </div>
       </div>
@@ -28,14 +28,14 @@
 <div class = "offered-header">
   <h4>What was offered on this product </h4>
 </div>
-<div class="offerings">
-  <% if @item.offered_offerings.any? %>
-    <% @item.offered_offerings.each do |offering| %>
-      <h4><%= offering.offered.name %></h4>
-      <p><%= offering.offered.description %></p>
-    <% end %>
-  <% else %>
-    <h5>No offer yet.</h5>
-  <% end %>
-</div>
-<%# testing purposes %>
+
+<% @item.offered_offerings.each do |offering| %>
+  <div class="offerings">
+    <div class='offering-image'><%= cl_image_tag offering.offered.photo.key, height: 100, width: 200, crop: :fill  %></div>
+    <div class='offering-content'>
+        <%# <% offering = Offering.find_by(item: @item, movie: movie) %>
+        <h4><%= offering.offered.name.capitalize %></h4>
+        <p><%= offering.offered.description %></p>
+    </div>
+  </div>
+<% end %>
