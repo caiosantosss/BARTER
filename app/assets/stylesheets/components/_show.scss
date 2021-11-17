@@ -1,2 +1,12 @@
 @import "components/card";
 @import "components/button";
+
+.card-item-picture{
+ width: 550px;
+ height: 350px;
+ margin-left: 14px;
+ object-fit: cover;
+}
+.card-img-top{
+  object-fit: cover;
+}
