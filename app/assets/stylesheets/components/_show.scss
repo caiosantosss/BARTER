@@ -1,27 +1,28 @@
 
 .offerings{
   // border: 1px solid gray;
-  margin: 10px 10px;
+  margin: 10px 100px;
   padding: 4px;
   display: flex;
   .offering-content {
     flex-grow: 1;
     padding-left: 10px;
-    border-top: 1px solid rgb(196, 195, 195);
-    border-bottom: 1px solid rgb(196, 195, 195);
-    border-right: 1px solid rgb(196, 195, 195);
-    // align-self: center;
+    box-shadow: 0 0 15px rgba(0,0,0,0.2);
     h4 {
       margin: 10px 0px;
-      font-weight: bold;
+      font-weight: 500;
+      font-size: 22px;
     }
   }
 }
 .offered-header{
-  margin-left: 10px;
-  margin-top: 10px;
-  .h4{
+  width: 85%;
+  margin-left: 100px;
+  margin-top: 30px;
+  border-bottom: 1px solid rgb(199, 197, 197);
+  .h4 {
     font-style: bold;
+    font-size: 23px;
   }
 }
 .form{
