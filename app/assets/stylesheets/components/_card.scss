@@ -71,7 +71,7 @@
     margin: 4px;
     cursor: pointer;
     transition: transform 0.5s;
-    transform: translateY(60px);
+    transform: translateX(60px);
   }
 
 li:hover {
@@ -83,7 +83,7 @@ li:hover {
   transform: translateY(0px);
 }
 
-.action li span {
+.action span {
   position: absolute;
   right: 50px;
   top: 50%;
@@ -100,7 +100,7 @@ li:hover {
   transition: 0.5s;
 }
 
-.action li:hover span {
+.action:hover span {
   transform: translateY(-50%) translateX(0px);
   opacity: 1;
 }
