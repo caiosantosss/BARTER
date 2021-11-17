@@ -4,7 +4,7 @@
     <div>
       <h2><%= @item.name %></h2>
       <p><%= @item.description %></p>
-       <%# <%= link_to 'Offer', new_item_offering_path(@item), class: 'btn btn-flat btn-lg float-right pr-5' %> %>
+                           <%# <%= link_to 'Offer', new_item_offering_path(@item), class: 'btn btn-flat btn-lg float-right pr-5' %>
     </div>
   </div>
 </div>
@@ -13,13 +13,15 @@
 <%# if there is %>
 <%# if item-offering include item-id then display  all of them%>
 
-<div class="container">
-  <% @item.offered_offerings.each do |offering| %>
-  <%# <% offering = Offering.find_by(item: @item, movie: movie) %>
-   <h4><%= offering.offered.name %></h4>
-   <p><%= offering.offered.description %></p>
+<div class="offerings">
+    <% @item.offered_offerings.each do |offering| %>
+    <%# <% offering = Offering.find_by(item: @item, movie: movie) %>
+    <h4><%= offering.offered.name %></h4>
+    <p><%= offering.offered.description %></p>
   <% end %>
+  </div>
 </div>
+<%# Some changes were made  %>
 <%= link_to 'Create New Item', new_item_path %>
 <% if user_signed_in? %>
   <div class="form">
@@ -33,5 +35,6 @@
   <%= link_to "Sign in to offer",  new_user_session_path %>
 <% end %>
 
+
 <%# collection: current_user.items.map {|item| [cl_image_tag(item.photo.key, width: 300, height: 200, crop: :scale), item.id] } %>
-<%# cl_image_tag @item.photo.key, height: 300, width: 400, crop: :fill %>
+<%# <%= cl_image_tag @item.photo.key, height: 300, width: 400, crop: :fill %> %>
