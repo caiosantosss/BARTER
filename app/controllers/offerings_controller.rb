@@ -38,6 +38,7 @@ class OfferingsController < ApplicationController
 
   def update
     @offering = Offering.find(params[:id])
+    authorize @offering
     if @offering.update(offering_params)
       redirect_to dashboard_path
     else

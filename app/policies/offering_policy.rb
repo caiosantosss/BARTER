@@ -17,7 +17,11 @@ class OfferingPolicy < ApplicationPolicy
   #   record.offered.user == user || record.posted.user == user
   # end
 
-  # def update?
-  #   record.offered.user == user || record.posted.user == user
-  # end
+  def update?
+    record.offered.user == user || record.posted.user == user
+  end
+
+  def accept_or_reject?
+    record.posted.user == user
+  end
 end
