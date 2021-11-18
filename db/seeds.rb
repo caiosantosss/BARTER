@@ -39,7 +39,6 @@ puts 'Creating Users and Items'
     file = URI.open("http://source.unsplash.com/featured/?#{item_name}&#{rand(1000)}")
     item.photo.attach(io: file, filename: 'item.png', content_type: 'image/png')
   end
-
 end
 
 puts 'User and items created'

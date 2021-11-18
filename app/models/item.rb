@@ -23,5 +23,4 @@ class Item < ApplicationRecord
   def offered_offerings
     Offering.where(posted: self)
   end
-
 end

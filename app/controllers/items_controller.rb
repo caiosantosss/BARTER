@@ -1,5 +1,5 @@
 class ItemsController < ApplicationController
-  skip_before_action :authenticate_user!, only: [:index, :show]
+  skip_before_action :authenticate_user!, only: [:index, :show, :new]
   def index
     @search_items =
       if params[:query].present?
@@ -14,4 +14,26 @@ class ItemsController < ApplicationController
     @offering = Offering.new
     authorize @item
   end
+
+  def new
+    @item = Item.new
+    authorize @item
+  end
+
+  def create
+    @item = Item.new(list_params)
+    authorize @item
+    if @item.save
+      redirect_to item_path(@item)
+    else
+      render :new
+    end
+  end
+
+  private
+
+  def list_params
+    params.require(:item).permit(:name, :description, :photo)
+  end
+
 end
