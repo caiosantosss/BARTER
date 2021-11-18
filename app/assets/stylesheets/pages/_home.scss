@@ -10,50 +10,52 @@
   text-align: center;
 }
 
+.home-banner-container {
+  width: 50%;
+}
+
 .home-banner h1 {
   margin: 0;
   color: white;
   text-shadow: 1px 1px 3px rgba(0,0,0,0.2);
   font-size: 64px;
   font-weight: bold;
+  font-family: 'Poppins', sans-serif;
+  letter-spacing: 3px;
 }
 
 .home-banner h2 {
-  font-size: 32px;
+  font-size: 25px;
   color: white;
   opacity: .7;
   text-shadow: 1px 1px 3px rgba(0,0,0,0.2);
+  font-family: 'Poppins', sans-serif;
+  letter-spacing: 3px;
 }
 
-.btn-green {
-  color: white;
-  padding: 8px 24px;
-  border-radius: 4px;
-  background: #1EDD88;
-  transition: 0.3s ease;
+.home-content-container {
+  width: 80vw;
+  margin: 0 auto;
+  min-height: 60vh;
+}
 
-  :hover {
-    background: #1BCB7F;
-    color: white;
+.company-description {
+  h5 {
+    font-size: 20px;
+    padding-bottom: 10px;
+    padding-top: 1.5em;
+    margin-bottom: 0px;
   }
-}
 
-.btn-yellow {
-  color: white;
-  padding: 8px 24px;
-  border-radius: 4px;
-  background: #FFB934;
-  transition: 0.3s ease;
-
-  :hover {
-    background: #1BCB7F;
-    color: white;
+  h3 {
+    font-size: 30px;
+    padding: 10px 0;
   }
-}
 
-.home-banner-button-div {
-  margin: 0 10px;
-  width: 100px;
+  p {
+    font-size: 16px;
+    padding: 10px 0;
+  }
 }
 
 // Specific CSS for your home-page
@@ -72,6 +74,7 @@
   font-weight: bold;
   text-align: center;
   padding-bottom: 20px;
+  font-family: 'Poppins', sans-serif;
 }
 
 .banner h2 {
@@ -80,6 +83,7 @@
   text-shadow: 1px 1px 3px rgba(0,0,0,0.2);
   font-size: 30px;
   text-align: center;
+  font-family: 'Poppins', sans-serif;
 }
 
 .banner p {
