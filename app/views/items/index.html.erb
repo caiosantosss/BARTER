@@ -25,14 +25,16 @@
     </div>
   </div>
 </div>
-<%# item_cards %>
+<%# item_card %>
 <div class="item-card-body">
   <div class="card-container">
-    <% @search_items.each do |pg_search_document| %>
+    <% @search_items.each do |item| %>
       <div class="item-card">
         <div class="imgBx">
-          <%= link_to item_path(pg_search_document) do%>
-            <%= cl_image_tag(pg_search_document.photo.key) %>
+          <% if item.photo.attached? %>
+            <%= link_to item_path(item) do%>
+              <%= cl_image_tag(item.photo.key) %>
+            <% end %>
           <% end %>
           <ul class="action">
             <li><i class="far fa-bookmark"></i></li>
@@ -41,7 +43,7 @@
         </div>
         <div class="item-content">
           <div class="productName">
-            <%= link_to pg_search_document.name.capitalize, item_path(pg_search_document)%>
+            <%= link_to item.name.capitalize, item_path(item)%>
           </div>
         </div>
       </div>
