@@ -11,9 +11,6 @@
   <li class="nav-item" role="presentation">
     <a class="tab-underlined" id="exchange-tab" data-toggle="tab" href="#exchanges" role="tab" aria-controls="exchange" aria-selected="false">Exchanges</a>
   </li>
-  <li class="nav-item" role="presentation">
-    <a class="tab-underlined" id="history-tab" data-toggle="tab" href="#history" role="tab" aria-controls="history" aria-selected="false">History</a>
-  </li>
 </ul>
 <% accepted = [] %>
 <% @user.items.each do |item| %>
@@ -48,7 +45,9 @@
 <% exchanged = []%>
 <% @user.items.each do |item| %>
   <% @offerings.each do |offering|%>
-    <% exchanged << item if offering.offered == item && offering.exchanged? %>
+    <% if offering.exchanged? %>
+    <% exchanged << item if offering.offered == item || offering.posted == item %>
+    <% end %>
   <% end %>
 <% end %>
 
@@ -186,9 +185,35 @@
           <p>You have no upcoming exchange!</p>
         <% end %>
     </div>
-  </div>
-  <div class="tab-pane fade py-3" id="history" role="tabpanel" aria-labelledby="history-tab">
-    This is the content for the History tab. Notice in the tab HTML there is a href="#history". This is pointing to the id of this div.
-
+    <div class="pending-offer-container">
+        <% if exchanged.count != 0%>
+          <p>Past exchanges:</p>
+          <div class="pending-card-container">
+          <%# !ADD SORT BY DATE  %>
+          <% exchanged.each do |user_item| %>
+            <div class="pending-offer-card">
+              <div class="offered-item-card">
+                <div class="card-photo"><p>Your offer:</p><%= cl_image_tag user_item.photo.key, height: 130, width: 130, crop: :fill %></div>
+                <div class="card-content">
+                  <p><%= user_item.name.capitalize %></p>
+                </div>
+              </div>
+              <div class="posted-item-card">
+                <% accepted_corresponding_item = @offerings.map do |offering| %>
+                  <% user_item == offering.offered ? offering.posted : offering.offered%>
+                <% end.compact.first%>
+                <div class="card-photo"><p><%=accepted_corresponding_item.user.name%>'s offer:</p><%= cl_image_tag accepted_corresponding_item.photo.key, height: 130, width: 130, crop: :fill %></div>
+                <div class="card-content">
+                  <p><%= accepted_corresponding_item.name.capitalize %></p>
+                </div>
+              </div>
+            </div>
+          <% end %>
+          </div>
+        <% else %>
+          <p>Past exchanges:</p>
+          <p>No exchanges have been made so far!</p>
+        <% end %>
+    </div>
   </div>
 </div>
