@@ -26,27 +26,4 @@
   </div>
 </div>
 <%# item_card %>
-<div class="item-card-body">
-  <div class="card-container">
-    <% @search_items.each do |item| %>
-      <div class="item-card">
-        <div class="imgBx">
-          <% if item.photo.attached? %>
-            <%= link_to item_path(item) do%>
-              <%= cl_image_tag(item.photo.key) %>
-            <% end %>
-          <% end %>
-          <ul class="action">
-            <li><i class="far fa-bookmark"></i></li>
-            <span>Add to Bookmark</span>
-          </ul>
-        </div>
-        <div class="item-content">
-          <div class="productName">
-            <%= link_to item.name.capitalize, item_path(item)%>
-          </div>
-        </div>
-      </div>
-    <% end %>
-  </div>
-</div>
+<%= render 'item_card' %>
