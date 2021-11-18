@@ -32,7 +32,7 @@
 //create button @index
 
 .button {
-  background-color: #464241;
+  background-color: #c4cbce;
   border: none;
   color: black;
   padding: 16px 32px;
@@ -44,6 +44,7 @@
   text-decoration: none;
   margin-left: 75%;
   border-radius: 4px;
+  max-width: 200px;
 }
 .button:hover{
   opacity: 0.6;

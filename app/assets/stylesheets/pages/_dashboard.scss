@@ -1,8 +1,25 @@
+
+
 .info-container {
   display: flex;
   justify-content: space-around;
   .info-card {
-
+     -moz-border-radius: 6px;
+     -webkit-border-radius: 6px;
+     background-color: #c4cbce;
+     background-position: 9px 0px;
+     background-repeat: no-repeat;
+     border: solid 1px #6f7477;
+     border-radius: 6px;
+     line-height: 18px;
+     overflow: hidden;
+     padding: 15px 60px;
+       box-shadow: 10px 10px 8px 10px #888888;
+  }
+  p{
+    margin-top: 8px;
+    margin-left: 8px;
+    padding: 5px;
   }
 }
 
@@ -12,14 +29,35 @@
   justify-content: space-around;
   .status-card{
     .status-card-container {
+
       display: flex;
       .card-photo{
-
+        position: relative;
+        width: 1200px;
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
+        gap: 20px;
+        padding: 20px;
       }
       .card-content{
-
+        box-shadow: 0 0 15px rgba(0,0,0,0.2);
+        background-color: white;
       }
     }
+     p{
+       box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+       max-width: 300px;
+       margin: auto;
+       text-align: center;
+       font-family: arial;
+       padding: 4px;
+       transition: 1s;
+         box-shadow: 10px 10px 8px 10px #888888;
+      }
+      p:hover{
+        background-color: rgb(209, 220, 223);
+
+      }
   }
 }
 
@@ -122,4 +160,12 @@
       background-color: white;
     }
   }
+}
+
+.nav-item{
+  border-radius: 4px;
+}
+.nav-item:hover{
+  background-color: rgb(115, 120, 121);
+  border-radius: 4px;
 }

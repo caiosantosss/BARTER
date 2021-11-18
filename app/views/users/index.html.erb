@@ -46,32 +46,32 @@
 <% @user.items.each do |item| %>
   <% @offerings.each do |offering|%>
     <% if offering.exchanged? %>
-    <% exchanged << item if offering.offered == item || offering.posted == item %>
+      <% exchanged << item if offering.offered == item || offering.posted == item %>
     <% end %>
   <% end %>
 <% end %>
-
+<%# From here %>
 <div class="tab-content" id="myTabContent">
   <div class="tab-pane fade py-3 show active" id="home" role="tabpanel" aria-labelledby="home-tab">
-    <div class= 'info-container'>
+    <div class= 'info-container' >
       <div class= 'info-card'>
-        <p>Name: <%= @user.name %></p>
-        <p>Email: <%= @user.email %></p>
-        <p>Contact: <%= @user.phone_number %></p>
-        <p>Location: <%= @user.location %></p>
+        <p><strong>Name:</strong> <%= @user.name %></p>
+        <p><strong>Email:</strong>  <%= @user.email %></p>
+        <p><strong>Contact:</strong> <%= @user.phone_number %></p>
+        <p><strong>Location:</strong> <%= @user.location %></p>
       </div>
       <div class= 'info-card'>
         <%# No status changed %>
-        <p>You have</p>
+        <p><strong>You have :</strong></p>
         <% if accepted.count != 0 && rejected.count != 0%>
-          <p>- <%= accepted.count %> offers accpeted</p>
+          <p>- <%= accepted.count %> offers accepted</p>
           <p>- <%= rejected.count %> offers rejected</p>
         <% else %>
           <p>No offers have been accepted or rejected.</p>
         <% end %>
         <%# Status changed (status on offerings)%>
         <% if pending.count != 0%>
-          <p>- <%= pending.count %> pending offers</p>
+          <p>- <strong><%= pending.count %></strong> pending offers</p>
         <% else %>
           <p>You have no pending offer!</p>
         <% end %>
@@ -95,13 +95,14 @@
       <div class="status-card">
         <% pending_items = @user.items.select do |item| %>
           <% @offerings.each do |offering|%>
-              <% offering.posted == item && offering.pending? %>
+            <% offering.posted == item && offering.pending? %>
           <% end %>
         <% end %>
         <p>You have <%= pending_items.count %> pending items</p>
       </div>
     </div>
   </div>
+  <%# Until here %>
   <div class="tab-pane fade py-3" id="offers" role="tabpanel" aria-labelledby="offer-tab">
     <div class="pending-offer-body">
         <% if pending.count != 0 %>
