@@ -55,3 +55,19 @@
     }
   }
 }
+
+.user-items-card-container{
+  position: relative;
+  width: 1200px;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
+  gap: 20px;
+  padding: 20px;
+  .item-card{
+    height: 300px;
+    .item-content{
+      box-shadow: 0 0 15px rgba(0,0,0,0.2);
+      background-color: white;
+    }
+  }
+}

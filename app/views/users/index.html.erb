@@ -117,7 +117,25 @@
     </div>
   </div>
   <div class="tab-pane fade py-3" id="items" role="tabpanel" aria-labelledby="item-tab">
-    This is the content for the Items tab. Notice in the tab HTML there is a href="#items". This is pointing to the id of this div.
+    <div class="item-card-body" style='background-color: white'>
+      <div class="user-items-card-container">
+        <% pending.each do |pg_search_document| %>
+          <div class="item-card">
+            <div class="imgBx">
+              <%= link_to item_path(pg_search_document) do%>
+                <%= cl_image_tag(pg_search_document.photo.key) %>
+              <% end %>
+            </div>
+            <div class="item-content">
+              <div class="productName">
+                <%= link_to pg_search_document.name.capitalize, item_path(pg_search_document)%>
+              </div>
+            </div>
+          </div>
+        <% end %>
+      </div>
+    </div>
+
   </div>
   <div class="tab-pane fade py-3" id="exchanges" role="tabpanel" aria-labelledby="exchange-tab">
     This is the content for the Exchanges tab. Notice in the tab HTML there is a href="#exchanges". This is pointing to the id of this div.
