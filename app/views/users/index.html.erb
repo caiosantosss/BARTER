@@ -16,13 +16,19 @@
   </li>
 </ul>
 <% accepted = [] %>
-<% @user.items.select do |item| %>
+<% @user.items.each do |item| %>
   <% @offerings.each do |offering|%>
     <% accepted << item if offering.offered == item && offering.accepted? %>
   <% end %>
 <% end %>
+<% accepted_posted = [] %>
+<% @user.items.each do |item| %>
+  <% @offerings.each do |offering|%>
+    <% accepted_posted << item if offering.posted == item && offering.accepted? %>
+  <% end %>
+<% end %>
 <% rejected = [] %>
-<% @user.items.select do |item| %>
+<% @user.items.each do |item| %>
   <% @offerings.each do |offering|%>
     <% rejected << item if offering.offered == item && offering.rejected? %>
   <% end %>
@@ -31,6 +37,12 @@
 <% @user.items.each do |item| %>
   <% @offerings.each do |offering|%>
     <% pending << item if offering.offered == item && offering.pending? %>
+  <% end %>
+<% end %>
+<% pending_posted = [] %>
+<% @user.items.each do |item| %>
+  <% @offerings.each do |offering|%>
+    <% pending_posted << item if offering.posted == item && offering.pending? %>
   <% end %>
 <% end %>
 <% exchanged = []%>
@@ -118,14 +130,14 @@
           <% end %>
           </div>
         <% else %>
-          <p>You have no upcoming exchange!</p>
+          <p>You have no pending offer!</p>
         <% end %>
     </div>
   </div>
   <div class="tab-pane fade py-3" id="items" role="tabpanel" aria-labelledby="item-tab">
     <div class="item-card-body" style='background-color: white'>
       <div class="user-items-card-container">
-        <% pending.each do |item| %>
+        <% pending_posted.each do |item| %>
           <div class="item-card">
             <div class="imgBx">
               <%= link_to item_path(item) do%>
@@ -144,16 +156,36 @@
 
   </div>
   <div class="tab-pane fade py-3" id="exchanges" role="tabpanel" aria-labelledby="exchange-tab">
-    This is the content for the Exchanges tab. Notice in the tab HTML there is a href="#exchanges". This is pointing to the id of this div.
-    <% accepted.each do |item| %>
-      <div class="status-card-container">
-        <div class="card-photo"><%= cl_image_tag item.photo.key, height: 100, width: 100, crop: :fill %></div>
-        <div class="card-content">
-          <p><%= item.name %></p>
-          <p><%= item.description %></p>
-        </div>
-      </div>
-    <% end %>
+    <div class="pending-offer-container">
+        <% if accepted.count != 0 || accepted_posted.count != 0%>
+          <% accepted_items = accepted + accepted_posted %>
+          <p>Your upcoming exchanges:</p>
+          <div class="pending-card-container">
+          <%# !ADD SORT BY DATE  %>
+          <% accepted_items.each do |user_item| %>
+            <div class="pending-offer-card">
+              <div class="offered-item-card">
+                <div class="card-photo"><p>Your offer:</p><%= cl_image_tag user_item.photo.key, height: 130, width: 130, crop: :fill %></div>
+                <div class="card-content">
+                  <p><%= user_item.name.capitalize %></p>
+                </div>
+              </div>
+              <div class="posted-item-card">
+                <% accepted_corresponding_item = @offerings.map do |offering| %>
+                  <% user_item == offering.offered ? offering.posted : offering.offered%>
+                <% end.compact.first%>
+                <div class="card-photo"><p><%=accepted_corresponding_item.user.name%>'s offer:</p><%= cl_image_tag accepted_corresponding_item.photo.key, height: 130, width: 130, crop: :fill %></div>
+                <div class="card-content">
+                  <p><%= accepted_corresponding_item.name.capitalize %></p>
+                </div>
+              </div>
+            </div>
+          <% end %>
+          </div>
+        <% else %>
+          <p>You have no upcoming exchange!</p>
+        <% end %>
+    </div>
   </div>
   <div class="tab-pane fade py-3" id="history" role="tabpanel" aria-labelledby="history-tab">
     This is the content for the History tab. Notice in the tab HTML there is a href="#history". This is pointing to the id of this div.
