@@ -86,33 +86,34 @@
     </div>
   </div>
   <div class="tab-pane fade py-3" id="offers" role="tabpanel" aria-labelledby="offer-tab">
-    <div class="status-container">
-      <div class="status-card">
-        <div><% if pending.count != 0 %></div>
+    <div class="pending-offer-container">
+        <% if pending.count != 0 %>
           <p>Your Pending Offers:</p>
-          <div class="status-card-container">
-            <div>
-              <% pending.each do |user_item| %>
-                <div class="card-photo"><%= cl_image_tag user_item.photo.key, height: 100, width: 100, crop: :fill %></div>
-                <div class="card-content">
-                  <p><% user_item.name %></p>
-                  <p><% current_user.name %></p>
-                </div>
+          <div class="pending-card-container">
+          <% pending.each do |user_item| %>
+            <div class="pending-offer-card">
+              <div class="posted-item-card">
                 <% pending_posted_item = @offerings.map do |offering| %>
                   <% offering.posted if user_item == offering.offered %>
                 <% end.compact.first%>
-                <div class="card-photo"><%= cl_image_tag pending_posted_item.photo.key, height: 100, width: 100, crop: :fill %></div>
+                <div class="card-photo"><p>Item interested:</p><%= cl_image_tag pending_posted_item.photo.key, height: 130, width: 130, crop: :fill %></div>
                 <div class="card-content">
-                  <p><%= pending_posted_item.name %></p>
-                  <p><%= pending_posted_item.user.name %></p>
+                  <p><%= pending_posted_item.name.capitalize %></p>
+                  <p>Owner: <%= pending_posted_item.user.name %></p>
                 </div>
-              <% end %>
+              </div>
+              <div class="offered-item-card">
+                <div class="card-photo"><p>Your offer:</p><%= cl_image_tag user_item.photo.key, height: 130, width: 130, crop: :fill %></div>
+                <div class="card-content">
+                  <p><%= user_item.name.capitalize %></p>
+                </div>
+              </div>
             </div>
+          <% end %>
           </div>
         <% else %>
           <p>You have no upcoming exchange!</p>
         <% end %>
-      </div>
     </div>
   </div>
   <div class="tab-pane fade py-3" id="items" role="tabpanel" aria-labelledby="item-tab">
