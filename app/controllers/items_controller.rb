@@ -3,13 +3,10 @@ class ItemsController < ApplicationController
   def index
     @search_items =
       if params[:query].present?
-        Item.search_by_name_and_description(params[:query])
+        policy_scope(Item).search_by_name_and_description(params[:query])
       else
-        Item.all
+        policy_scope(Item).all
       end
-    # @items = policy_scope(Item)
-    @items = policy_scope(Item)
-    authorize @items
   end
 
   def show
@@ -17,5 +14,4 @@ class ItemsController < ApplicationController
     @offering = Offering.new
     authorize @item
   end
-
 end
