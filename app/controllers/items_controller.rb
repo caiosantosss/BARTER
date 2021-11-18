@@ -1,9 +1,12 @@
 class ItemsController < ApplicationController
   skip_before_action :authenticate_user!, only: [:index, :show]
   def index
-    # @items = policy_scope(Item)
-    @items = policy_scope(Item)
-    authorize @items
+    @search_items =
+      if params[:query].present?
+        policy_scope(Item).search_by_name_and_description(params[:query])
+      else
+        policy_scope(Item).all
+      end
   end
 
   def show
@@ -11,5 +14,4 @@ class ItemsController < ApplicationController
     @offering = Offering.new
     authorize @item
   end
-
 end
