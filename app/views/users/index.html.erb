@@ -33,6 +33,12 @@
     <% pending << item if offering.offered == item && offering.pending? %>
   <% end %>
 <% end %>
+<% exchanged = []%>
+<% @user.items.each do |item| %>
+  <% @offerings.each do |offering|%>
+    <% exchanged << item if offering.offered == item && offering.exchanged? %>
+  <% end %>
+<% end %>
 
 <div class="tab-content" id="myTabContent">
   <div class="tab-pane fade py-3 show active" id="home" role="tabpanel" aria-labelledby="home-tab">
@@ -119,16 +125,16 @@
   <div class="tab-pane fade py-3" id="items" role="tabpanel" aria-labelledby="item-tab">
     <div class="item-card-body" style='background-color: white'>
       <div class="user-items-card-container">
-        <% pending.each do |pg_search_document| %>
+        <% pending.each do |item| %>
           <div class="item-card">
             <div class="imgBx">
-              <%= link_to item_path(pg_search_document) do%>
-                <%= cl_image_tag(pg_search_document.photo.key) %>
+              <%= link_to item_path(item) do%>
+                <%= cl_image_tag(item.photo.key) %>
               <% end %>
             </div>
             <div class="item-content">
               <div class="productName">
-                <%= link_to pg_search_document.name.capitalize, item_path(pg_search_document)%>
+                <%= link_to item.name.capitalize, item_path(item)%>
               </div>
             </div>
           </div>
@@ -151,5 +157,6 @@
   </div>
   <div class="tab-pane fade py-3" id="history" role="tabpanel" aria-labelledby="history-tab">
     This is the content for the History tab. Notice in the tab HTML there is a href="#history". This is pointing to the id of this div.
+
   </div>
 </div>

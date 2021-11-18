@@ -18,7 +18,7 @@
           collection_wrapper_class: 'category-wrapper',
           item_wrapper_class: 'category-item',
           input_html: {class: 'category-selector'},
-          collection: current_user.items.map { |img| cl_image_tag(img.photo.key, height: 100, width: 100, crop: :fill) } %>
+          collection: current_user.items.map { |img| [cl_image_tag(img.photo.key, height: 100, width: 100, crop: :fill), img.id ] } %>
           <div class="d-flex justify-content-center"><%= f.submit class: 'btn btn-flat right', value: 'Make an Offer', data: { disable_with: false }%></div>
         <% end %>
       </div>
