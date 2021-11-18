@@ -1,0 +1,136 @@
+<ul class="nav tabs-underlined" id="myTab" role="tablist">
+  <li class="nav-item" role="presentation">
+    <a class="active tab-underlined" id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home" aria-selected="true">Home</a>
+  </li>
+  <li class="nav-item" role="presentation">
+    <a class="tab-underlined" id="offer-tab" data-toggle="tab" href="#offers" role="tab" aria-controls="offer" aria-selected="false">Offers</a>
+  </li>
+  <li class="nav-item" role="presentation">
+    <a class="tab-underlined" id="item-tab" data-toggle="tab" href="#items" role="tab" aria-controls="item" aria-selected="false">Items</a>
+  </li>
+  <li class="nav-item" role="presentation">
+    <a class="tab-underlined" id="exchange-tab" data-toggle="tab" href="#exchanges" role="tab" aria-controls="exchange" aria-selected="false">Exchanges</a>
+  </li>
+  <li class="nav-item" role="presentation">
+    <a class="tab-underlined" id="history-tab" data-toggle="tab" href="#history" role="tab" aria-controls="history" aria-selected="false">History</a>
+  </li>
+</ul>
+<% accepted = [] %>
+<% @user.items.select do |item| %>
+  <% @offerings.each do |offering|%>
+    <% accepted << item if offering.offered == item && offering.accepted? %>
+  <% end %>
+<% end %>
+<% rejected = [] %>
+<% @user.items.select do |item| %>
+  <% @offerings.each do |offering|%>
+    <% rejected << item if offering.offered == item && offering.rejected? %>
+  <% end %>
+<% end %>
+<% pending = []%>
+<% @user.items.each do |item| %>
+  <% @offerings.each do |offering|%>
+    <% pending << item if offering.offered == item && offering.pending? %>
+  <% end %>
+<% end %>
+
+<div class="tab-content" id="myTabContent">
+  <div class="tab-pane fade py-3 show active" id="home" role="tabpanel" aria-labelledby="home-tab">
+    <div class= 'info-container'>
+      <div class= 'info-card'>
+        <p>Name: <%= @user.name %></p>
+        <p>Email: <%= @user.email %></p>
+        <p>Contact: <%= @user.phone_number %></p>
+        <p>Location: <%= @user.location %></p>
+      </div>
+      <div class= 'info-card'>
+        <%# No status changed %>
+        <p>You have</p>
+        <% if accepted.count != 0 && rejected.count != 0%>
+          <p>- <%= accepted.count %> offers accpeted</p>
+          <p>- <%= rejected.count %> offers rejected</p>
+        <% else %>
+          <p>No offers have been accepted or rejected.</p>
+        <% end %>
+        <%# Status changed (status on offerings)%>
+        <% if pending.count != 0%>
+          <p>- <%= pending.count %> pending offers</p>
+        <% else %>
+          <p>You have no pending offer!</p>
+        <% end %>
+      </div>
+    </div>
+    <div class="status-container">
+      <div class="status-card">
+        <% if accepted.count != 0 %>
+          <p>Most recent upcoming exchange:</p>
+          <div class="status-card-container">
+            <div class="card-photo"><%= cl_image_tag accepted.first.photo.key, height: 100, width: 100, crop: :fill %></div>
+            <div class="card-content">
+              <p><%= accepted.first.name %></p>
+              <p><%= accepted.first.description %></p>
+            </div>
+          </div>
+        <% else %>
+          <p>You have no upcoming exchange!</p>
+        <% end %>
+      </div>
+      <div class="status-card">
+        <% pending_items = @user.items.select do |item| %>
+          <% @offerings.each do |offering|%>
+              <% offering.posted == item && offering.pending? %>
+          <% end %>
+        <% end %>
+        <p>You have <%= pending_items.count %> pending items</p>
+      </div>
+    </div>
+  </div>
+  <div class="tab-pane fade py-3" id="offers" role="tabpanel" aria-labelledby="offer-tab">
+    <div class="status-container">
+      <div class="status-card">
+        <div><% if pending.count != 0 %></div>
+          <p>Your Pending Offers:</p>
+          <div class="status-card-container">
+            <div>
+              <% pending.each do |user_item| %>
+                <div class="card-photo"><%= cl_image_tag user_item.photo.key, height: 100, width: 100, crop: :fill %></div>
+                <div class="card-content">
+                  <p><% user_item.name %></p>
+                  <p><% current_user.name %></p>
+                </div>
+                <% pending_posted_item = @offerings.map do |offering| %>
+                  <% offering.posted if user_item == offering.offered %>
+                <% end.compact.first%>
+                <div class="card-photo"><%= cl_image_tag pending_posted_item.photo.key, height: 100, width: 100, crop: :fill %></div>
+                <div class="card-content">
+                  <p><%= pending_posted_item.name %></p>
+                  <p><%= pending_posted_item.user.name %></p>
+                </div>
+              <% end %>
+            </div>
+          </div>
+        <% else %>
+          <p>You have no upcoming exchange!</p>
+        <% end %>
+      </div>
+    </div>
+  </div>
+  <div class="tab-pane fade py-3" id="items" role="tabpanel" aria-labelledby="item-tab">
+    This is the content for the Items tab. Notice in the tab HTML there is a href="#items". This is pointing to the id of this div.
+  </div>
+  <div class="tab-pane fade py-3" id="exchanges" role="tabpanel" aria-labelledby="exchange-tab">
+    This is the content for the Exchanges tab. Notice in the tab HTML there is a href="#exchanges". This is pointing to the id of this div.
+    <% accepted.each do |item| %>
+      <div class="status-card-container">
+        <div class="card-photo"><%= cl_image_tag item.photo.key, height: 100, width: 100, crop: :fill %></div>
+        <div class="card-content">
+          <p><%= item.name %></p>
+          <p><%= item.description %></p>
+        </div>
+      </div>
+    <% end %>
+  </div>
+  <div class="tab-pane fade py-3" id="history" role="tabpanel" aria-labelledby="history-tab">
+    This is the content for the History tab. Notice in the tab HTML there is a href="#history". This is pointing to the id of this div.
+  </div>
+</div>
