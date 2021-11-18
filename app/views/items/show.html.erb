@@ -18,7 +18,7 @@
           collection_wrapper_class: 'category-wrapper',
           item_wrapper_class: 'category-item',
           input_html: {class: 'category-selector'},
-          collection: current_user.items.map { |img| [cl_image_tag(img.photo.key, height: 100, width: 100, crop: :fill), img.id] } %>
+          collection: current_user.items.map { |img| cl_image_tag(img.photo.key, height: 100, width: 100, crop: :fill) } %>
           <div class="d-flex justify-content-center"><%= f.submit class: 'btn btn-flat right', value: 'Make an Offer', data: { disable_with: false }%></div>
         <% end %>
       </div>
@@ -46,7 +46,7 @@
             <p><%= offering.offered.description %></p>
           </div>
           <div class="d-flex">
-            <% if user_signed_in? %>
+            <% if policy(offering).edit? %>
               <div>
               <%= simple_form_for offering do |f| %>
                 <%= f.input :status, as: :hidden, input_html: { value: 'accepted'} %>
@@ -59,9 +59,9 @@
                 <%= f.submit 'Reject', class: 'btn btn-danger m-3' %>
               <% end %>
               </div>
-            </div>
             <% else %>
-          <% end %>
+            <% end %>
+          </div>
         </div>
       </div>
     <% end %>
