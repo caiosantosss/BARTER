@@ -1,0 +1,25 @@
+.info-container {
+  display: flex;
+  justify-content: space-around;
+  .info-card {
+
+  }
+}
+
+.status-container {
+  margin: 20px;
+  display: flex;
+  justify-content: space-around;
+  .status-card{
+    .status-card-container {
+      display: flex;
+      .card-photo{
+
+      }
+      .card-content{
+
+      }
+    }
+  }
+
+}
