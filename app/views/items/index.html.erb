@@ -2,28 +2,8 @@
 <div class="banner" style="background-image: linear-gradient(rgba(0,0,0,0.4),rgba(0,0,0,0.4)), url(https://images.unsplash.com/photo-1624564890916-2669288b9f16?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=2070&q=80);">
   <h1>Welcome to Barter</h1>
   <h2>Just exchange it</h2>
-  <div class="mask d-flex align-items-center h-100">
-    <div class="container">
-      <div class="card mask-custom p-2 mt-5">
-        <div class="card-body">
-          <div class="row justify-content-center">
-            <div class="col-md-6 mb-3 mb-md-0">
-              <div id="basic" class="form-outline form-white">
-                <%= form_tag items_path, class: "d-flex", method: :get do %>
-                  <%= text_field_tag :query,
-                    params[:query],
-                    class: "form-control",
-                    placeholder: "Find an item"
-                  %>
-                  <%= submit_tag "Search", class: "btn btn-info ml-1" %>
-                <% end %>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
+  <%# Search bar %>
+  <%= render 'shared/search_bar' %>
 </div>
 <%# item_card %>
 <%= render 'item_card' %>
