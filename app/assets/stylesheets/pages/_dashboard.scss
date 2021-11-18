@@ -61,37 +61,89 @@
   }
 }
 
-.pending-offer-container {
+.pending-offer-body {
   margin: 0 auto;
-  width: 600px;
+  width: 100%;
+  height: 100%;
+  // width: 800px;
   .pending-card-container {
-    display: inline-block;
-    width: 100%;
+    // display: inline-block;
+    margin: 0 auto;
+    width: 70%;
+    text-align: center;
+    padding: 0px;
+    h4 {
+      margin-top: 10px;
+      text-align:left;
+      padding: 5px;
+      border-bottom: 1px solid rgb(207, 205, 205);
+    }
     .pending-offer-card {
+      // margin: 0 auto;
+      height: 300px;
       width: 100%;
-      display: flex;
-      justify-content: center;
-      margin: 10px;
-      .posted-item-card{
-        display: flex;
-        width: 50%;
-        .card-content{
-          align-self: center;
-          margin-left: 10px;
-        }
-
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      margin:0;
+      gap: 20px;
+      padding: 20px;
+      border-bottom: 1px solid rgb(207, 205, 205);
+      .arrow {
+        font-size: 30px;
+        align-self: center;
       }
-      .offered-item-card{
-        display: flex;
-        flex-grow: 1;
-        text-align: center;
-        .card-content{
+      .posted-item-card, .offered-item-card {
+        // display: flex;
+        width: 400px;
+        // flex-grow: 1;
+        box-shadow: 0 0 15px rgba(0,0,0,0.2);
+        .card-content,.card-content a{
           align-self: center;
           margin-left: 10px;
+          text-decoration: none;
+          font-size: 18px;
+          font-weight: 500;
+          color: rgb(0, 0, 0);
+          margin: 2px 0;
+        }
+        .card-content {
+          height: 40%;
+          align-self: center;
+          text-align: left;
+          margin-left: 20px;
+          margin-top: 20px;
+          .booking-tag{
+            text-align: center;
+            margin: 0px 10px 0px 250px;
+          }
+          .text{
+            font-size: 13px;
+          }
+        }
+        .card-photo {
+          position: relative;
+          width: 100%;
+          height: 60%;
+          overflow: hidden;
+
+          img {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: 0.5s ease-in-out;
+            transform-origin: right;
+          }
         }
       }
     }
   }
+}
+
+.card-photo:hover img {
+  transform: scale(1.5);
 }
 
 .user-items-card-container{
