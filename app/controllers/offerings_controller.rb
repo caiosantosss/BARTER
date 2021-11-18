@@ -36,12 +36,19 @@ class OfferingsController < ApplicationController
   # def edit
   # end
 
-  # def update
-  # end
+  def update
+    @offering = Offering.find(params[:id])
+    authorize @offering
+    if @offering.update(offering_params)
+      redirect_to dashboard_path
+    else
+      render 'items/show'
+    end
+  end
 
   private
 
   def offering_params
-    params.require(:offering).permit(:offering)
+    params.require(:offering).permit(:offering, :status)
   end
 end
