@@ -4,8 +4,4 @@ class Offering < ApplicationRecord
   validates :offered_id, presence: true
   validates :posted_id, presence: true
   enum status: { pending: 0, accepted: 1, rejected: 2, exchanged: 3 }
-
-  def pending?
-    status == 'pending'
-  end
 end
