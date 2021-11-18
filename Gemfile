@@ -28,9 +28,11 @@ gem 'redis', '~> 4.0'
 # Reduces boot times through caching; required in config/boot.rb
 gem 'bootsnap', '>= 1.4.2', require: false
 
-gem 'devise'
+# Added
 gem 'cloudinary', '~> 1.16.1'
+gem 'devise'
 gem 'faker', :git => 'https://github.com/faker-ruby/faker.git', :branch => 'master'
+gem 'pg_search', '~> 2.3.0'
 gem 'unsplash'
 
 gem 'autoprefixer-rails', '10.2.5'
