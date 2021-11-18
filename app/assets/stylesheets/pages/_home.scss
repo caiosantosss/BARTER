@@ -33,35 +33,29 @@
   letter-spacing: 3px;
 }
 
-.btn-green {
-  color: white;
-  padding: 8px 24px;
-  border-radius: 4px;
-  background: #1EDD88;
-  transition: 0.3s ease;
-
-  :hover {
-    background: #1BCB7F;
-    color: white;
-  }
+.home-content-container {
+  width: 80vw;
+  margin: 0 auto;
+  min-height: 60vh;
 }
 
-.btn-yellow {
-  color: white;
-  padding: 8px 24px;
-  border-radius: 4px;
-  background: #FFB934;
-  transition: 0.3s ease;
-
-  :hover {
-    background: #1BCB7F;
-    color: white;
+.company-description {
+  h5 {
+    font-size: 20px;
+    padding-bottom: 10px;
+    padding-top: 1.5em;
+    margin-bottom: 0px;
   }
-}
 
-.home-banner-button-div {
-  margin: 0 10px;
-  width: 100px;
+  h3 {
+    font-size: 30px;
+    padding: 10px 0;
+  }
+
+  p {
+    font-size: 16px;
+    padding: 10px 0;
+  }
 }
 
 // Specific CSS for your home-page

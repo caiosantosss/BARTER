@@ -5,9 +5,16 @@
     <%= render 'home_search_bar' %>
   </div>
 </div>
-<div>
-  <%= image_tag 'macbook-pro' %>
-  <p>A Few Words About Us</p>
-  <h3>Who We Are</h3>
-  <p>Barter provides a platfrom where users can trade items without spending cash. Trade your items with other people and enjoy the unique experience.</p>
+<div class="home-content-container mt-3 d-flex align-items-center">
+  <div class="row pt-3">
+    <div class="col mac-book">
+      <%= image_tag 'macbook-pro', style: "width: 100%" %>
+    </div>
+    <div class="col company-description">
+      <h5>A Few Words About Us</h5>
+      <h3>Who We Are</h3>
+      <p style="text-align: justify; line-height: 30px;">Barter provides a platfrom where users can trade items without spending cash. Trade your items with other people and enjoy the unique experience.</p>
+      <%= link_to "Signup", items_path, class: "btn btn-info mt-3" %>
+    </div>
+  </div>
 </div>
