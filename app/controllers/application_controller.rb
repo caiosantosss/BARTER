@@ -16,6 +16,10 @@ class ApplicationController < ActionController::Base
 
   private
 
+  def after_sign_in_path_for(_user)
+    items_path
+  end
+
   def storable_location?
     request.get? && is_navigational_format? && !devise_controller? && !request.xhr?
   end
