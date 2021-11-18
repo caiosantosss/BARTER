@@ -3,6 +3,8 @@ class Item < ApplicationRecord
   # has_many :offerings (this doesnt work)
   has_one_attached :photo
 
+  include PgSearch::Model
+
   validates :name, presence: true
   validates :description, presence: true, length: {
     minimum: 4,
@@ -12,8 +14,13 @@ class Item < ApplicationRecord
     too_long: "must have at most 300 words"
   }
 
+  pg_search_scope :search_by_name_and_description,
+    against: [ :name, :description ],
+    using: {
+      tsearch: { prefix: true }
+    }
+
   def offered_offerings
     Offering.where(posted: self)
   end
-
 end

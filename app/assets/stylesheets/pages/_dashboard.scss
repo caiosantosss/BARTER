@@ -1,0 +1,57 @@
+.info-container {
+  display: flex;
+  justify-content: space-around;
+  .info-card {
+
+  }
+}
+
+.status-container {
+  margin: 20px;
+  display: flex;
+  justify-content: space-around;
+  .status-card{
+    .status-card-container {
+      display: flex;
+      .card-photo{
+
+      }
+      .card-content{
+
+      }
+    }
+  }
+}
+
+.pending-offer-container {
+  margin: 0 auto;
+  width: 600px;
+  .pending-card-container {
+    display: inline-block;
+    width: 100%;
+    .pending-offer-card {
+      width: 100%;
+      display: flex;
+      justify-content: center;
+      margin: 10px;
+      .posted-item-card{
+        display: flex;
+        width: 50%;
+        .card-content{
+          align-self: center;
+          margin-left: 10px;
+        }
+
+      }
+      .offered-item-card{
+        display: flex;
+        flex-grow: 1;
+        text-align: center;
+        .card-content{
+          align-self: center;
+          margin-left: 10px;
+        }
+      }
+    }
+  }
+}
