@@ -1,0 +1,15 @@
+<div class="container p-3 my-3">
+  <div class="row ">
+    <div class="col-12 col-md-6 offset-lg-3">
+      <div class= "p-3 mb-2 bg-dark text-white">
+        <h3>Create a new item</h3>
+        <%= simple_form_for @item do |f| %>
+          <%= f.input :name, placeholder: 'chair' %>
+          <%= f.input :description, placeholder: 'Never been use but totally damaged' %>
+          <%= f.input :photo, as: :file%>
+          <%= f.submit class: 'btn btn-secondary' %>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>
