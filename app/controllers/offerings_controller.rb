@@ -40,6 +40,7 @@ class OfferingsController < ApplicationController
     @offering = Offering.find(params[:id])
     authorize @offering
     if @offering.update(offering_params)
+      @offering.reject_others if @offering.accepted?
       redirect_to dashboard_path
     else
       render 'items/show'
