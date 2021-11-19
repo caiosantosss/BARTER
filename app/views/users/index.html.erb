@@ -24,6 +24,7 @@
     <% accepted_posted << item if offering.posted == item && offering.accepted? %>
   <% end %>
 <% end %>
+<% accepted_items = accepted + accepted_posted %>
 <% rejected = [] %>
 <% @user.items.each do |item| %>
   <% @offerings.each do |offering|%>
@@ -79,13 +80,13 @@
     </div>
     <div class="status-container">
       <div class="status-card">
-        <% if accepted.count != 0 %>
+        <% if accepted_items != 0 %>
           <p>Most recent upcoming exchange:</p>
           <div class="status-card-container">
-            <div class="card-photo"><%= cl_image_tag accepted.first.photo.key, height: 100, width: 100, crop: :fill %></div>
+            <div class="card-photo"><%= cl_image_tag accepted_items.first.photo.key, height: 200, width: 300, crop: :fill %></div>
             <div class="card-content">
-              <p><%= accepted.first.name %></p>
-              <p><%= accepted.first.description %></p>
+              <p><%= accepted_items.first.name %></p>
+              <p><%= accepted_items.first.description %></p>
             </div>
           </div>
         <% else %>
@@ -171,8 +172,7 @@
   </div>
   <div class="tab-pane fade py-3" id="exchanges" role="tabpanel" aria-labelledby="exchange-tab">
     <div class="pending-offer-body">
-        <% if accepted.count != 0 || accepted_posted.count != 0%>
-          <% accepted_items = accepted + accepted_posted %>
+        <% if accepted_items.count != 0%>
           <div class="pending-card-container">
             <h4>Your upcoming exchanges:</h4>
           <%# !ADD SORT BY DATE  %>
