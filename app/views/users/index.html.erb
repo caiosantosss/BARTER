@@ -80,7 +80,7 @@
     </div>
     <div class="status-container">
       <div class="status-card">
-        <% if accepted_items != 0 %>
+        <% if accepted_items.count != 0 %>
           <p>Most recent upcoming exchange:</p>
           <div class="status-card-container">
             <div class="card-photo"><%= cl_image_tag accepted_items.first.photo.key, height: 200, width: 300, crop: :fill %></div>
