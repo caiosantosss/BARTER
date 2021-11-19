@@ -1,0 +1,31 @@
+<div class="user-pending-items"; style="margin-top: 1.5em">
+  <div class="offering-image d-flex mb-2"; style="box-shadow: 0 0 4px rgb(0 0 0 / 20%)"><%= cl_image_tag pending_items.first.photo.key, height: 100, width: 150, crop: :fill %>
+    <div class="offering-content d-flex d-flex justify-content-between align-items-center"; style="padding-left: 10px";>
+      <div>
+        <h4 style="font-size: 1.2rem"><%= pending_items.first.name %></h4>
+        <p style="padding: 0px; text-align: left;"><%= pending_items.first.description %></p>
+      </div>
+    </div>
+  </div>
+  <div class="offering-image d-flex mb-2"; style="box-shadow: 0 0 4px rgb(0 0 0 / 20%)"><%= cl_image_tag pending_items.second.photo.key, height: 100, width: 150, crop: :fill %>
+    <div class="offering-content d-flex d-flex justify-content-between align-items-center"; style="padding-left: 10px"; >
+      <div>
+        <h4 style="font-size: 1.2rem"><%= pending_items.second.name %></h4>
+        <p style="padding: 0px; text-align: left;"><%= pending_items.second.description %></p>
+      </div>
+    </div>
+  </div>
+  <div class="offering-image d-flex mb-2"; style="box-shadow: 0 0 4px rgb(0 0 0 / 20%)"><%= cl_image_tag pending_items.third.photo.key, height: 100, width: 150, crop: :fill %>
+    <div class="offering-content d-flex d-flex justify-content-between align-items-center"; style="padding-left: 10px"; >
+      <div>
+        <h4 style="font-size: 1.2rem"><%= pending_items.third.name %></h4>
+        <p style="padding: 0px; text-align: left;"><%= pending_items.third.description %></p>
+      </div>
+    </div>
+  </div>
+  <div class="d-flex justify-content-center mt-3">
+    <% if pending_items.count > 4 %>
+      <%= link_to "Show more", "#", class: "btn btn-info"  %>
+    <% end %>
+  </div>
+</div>
