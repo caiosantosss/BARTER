@@ -41,7 +41,7 @@ class OfferingsController < ApplicationController
     authorize @offering
     if @offering.update(offering_params)
       @offering.reject_others if @offering.accepted?
-      redirect_to dashboard_path
+      redirect_to item_path(@offering.posted_id)
     else
       render 'items/show'
     end
