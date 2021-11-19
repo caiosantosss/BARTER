@@ -12,46 +12,13 @@
     <a class="<%='active' if params[:tab] == 'exchanges' %> tab-underlined" id="exchange-tab" data-toggle="tab" href="#exchanges" role="tab" aria-controls="exchange" aria-selected="false">Exchanges</a>
   </li>
 </ul>
-<% accepted = [] %>
-<% @user.items.each do |item| %>
-  <% @offerings.each do |offering|%>
-    <% accepted << item if offering.offered == item && offering.accepted? %>
-  <% end %>
-<% end %>
-<% accepted_posted = [] %>
-<% @user.items.each do |item| %>
-  <% @offerings.each do |offering|%>
-    <% accepted_posted << item if offering.posted == item && offering.accepted? %>
-  <% end %>
-<% end %>
-<% accepted_items = accepted + accepted_posted %>
-<% rejected = [] %>
-<% @user.items.each do |item| %>
-  <% @offerings.each do |offering|%>
-    <% rejected << item if offering.offered == item && offering.rejected? %>
-  <% end %>
-<% end %>
-<% pending = []%>
-<% @user.items.each do |item| %>
-  <% @offerings.each do |offering|%>
-    <% pending << item if offering.offered == item && offering.pending? %>
-  <% end %>
-<% end %>
-<% pending_posted = [] %>
-<% @user.items.each do |item| %>
-  <% @offerings.each do |offering|%>
-    <% pending_posted << item if offering.posted == item && offering.pending? %>
-  <% end %>
-<% end %>
-<% exchanged = []%>
-<% @user.items.each do |item| %>
-  <% @offerings.each do |offering|%>
-    <% if offering.exchanged? %>
-      <% exchanged << item if offering.offered == item || offering.posted == item %>
-    <% end %>
-  <% end %>
-<% end %>
-<%# From here %>
+
+<% accepted_items = @user.received_offers.accepted.map {|offering| offering.posted} + @user.sent_offers.accepted.map {|offering| offering.offered} %>
+<% exchanged_items = @user.received_offers.exchanged.map {|offering| offering.posted} + @user.sent_offers.exchanged.map {|offering| offering.offered} %>
+<% accepted_offers = @user.sent_offers.accepted %>
+<% rejected_offers = @user.sent_offers.rejected %>
+<% pending = @user.sent_offers.pending%>
+
 <div class="tab-content" id="myTabContent">
   <div class="tab-pane fade py-3 <%='show active' if params[:tab] == 'home' ||  params[:tab].blank? %>" id="home" role="tabpanel" aria-labelledby="home-tab">
     <div class= 'info-container' >
@@ -64,9 +31,9 @@
       <div class= 'info-card'>
         <%# No status changed %>
         <p><strong>You have :</strong></p>
-        <% if accepted.count != 0 && rejected.count != 0%>
-          <p>- <%= accepted.count %> offers accepted</p>
-          <p>- <%= rejected.count %> offers rejected</p>
+        <% if accepted_offers.count != 0 && rejected_offers.count != 0%>
+          <p>- <%= accepted_offers.count %> offers accepted</p>
+          <p>- <%= rejected_offers.count %> offers rejected</p>
         <% else %>
           <p>No offers have been accepted or rejected.</p>
         <% end %>
@@ -95,32 +62,24 @@
         <% end %>
       </div>
       <div class="status-card">
-        <% pending_items = @user.items.select do |item| %>
-          <% @offerings.each do |offering|%>
-            <% offering.posted == item && offering.pending? %>
-          <% end %>
-        <% end %>
-        <p>You have <%= pending_items.count %> pending items</p>
-        <hr>
-        <%= render 'pending_items', pending_items: pending_items %>
+
+        <p>You have <%= pending.count %> pending items</p>
+
+       
+        <%= render 'pending_items', pending: pending %>
+
       </div>
     </div>
   </div>
-  <%# Until here %>
   <div class="tab-pane fade py-3 <%='show active' if params[:tab] == 'offers' %>" id="offers" role="tabpanel" aria-labelledby="offer-tab">
     <div class="pending-offer-body">
-
       <% if pending.count != 0 %>
         <div class="pending-card-container">
-          <div>
-            <h4>Your Pending Offers:</h4>
-          </div>
-          <% pending.each do |user_item| %>
+          <div><h4>Your Pending Offers:</h4></div>
+          <% pending.each do |offering| %>
             <div class="pending-offer-card">
               <div class="posted-item-card">
-                <% pending_posted_item = @offerings.map do |offering| %>
-                  <% offering.posted if user_item == offering.offered %>
-                <% end.compact.first%>
+                <% pending_posted_item = offering.posted %>
                 <div class="card-photo">
                   <p>Item interested:</p>
                   <% if pending_posted_item.photo.attached? %>
@@ -140,14 +99,14 @@
               <div class="offered-item-card">
                 <div class="card-photo">
                   <p>Your offer:</p>
-                  <% if user_item.photo.attached? %>
-                    <%= link_to item_path(user_item) do%>
-                      <%= cl_image_tag(user_item.photo.key)%>
+                  <% if offering.offered.photo.attached? %>
+                    <%= link_to item_path(offering.offered) do%>
+                      <%= cl_image_tag(offering.offered.photo.key)%>
                     <% end %>
                   <% end %>
                 </div>
                 <div class="card-content">
-                  <p><%= link_to user_item.name.capitalize, item_path(user_item)%></p>
+                  <p><%= link_to offering.offered.name.capitalize, item_path(offering.offered)%></p>
                   <p class='booking-tag'>pending</p>
                 </div>
               </div>
@@ -155,7 +114,7 @@
           <% end %>
         </div>
       <% else %>
-        <p>You have no pending offer!</p>
+        <div class='statement'><p>You have no pending offer!</p></div>
       <% end %>
     </div>
   </div>
@@ -233,11 +192,11 @@
       <% end %>
     </div>
     <div class="pending-offer-body">
-      <% if exchanged.count != 0%>
+      <% if exchanged_items.count != 0%>
         <div class="pending-card-container">
           <h4>Past exchanges:</h4>
-          <%# !ADD SORT BY DATE  %>
-          <% exchanged.each do |user_item| %>
+        <%# !ADD SORT BY DATE  %>
+          <% exchanged_items.each do |user_item| %>
             <div class="pending-offer-card">
               <%# Time and Location  %>
               <div class="offered-item-card">
@@ -256,20 +215,16 @@
                 </div>
                 <div class="card-content">
                   <p><%= accepted_corresponding_item.name.capitalize %></p>
-                  <div class="text">
-                    <p>Owner: <%= accepted_corresponding_item.user.name %></p>
-                  </div>
-                  <div class="text">
-                    <p>Phone Number: <%= accepted_corresponding_item.user.phone_number %></p>
-                  </div>
+                  <div class="text"><p>Owner: <%= accepted_corresponding_item.user.name %></p></div>
+                  <div class="text"><p>Phone Number: <%= accepted_corresponding_item.user.phone_number %></p></div>
                 </div>
               </div>
             </div>
           <% end %>
         </div>
       <% else %>
-        <p>Past exchanges:</p>
-        <p>No exchanges have been made so far!</p>
+        <div class="title"><h4>Past exchanges:</h4></div>
+        <div class='statement'><p>No exchanges have been made so far!</p></div>
       <% end %>
     </div>
   </div>
