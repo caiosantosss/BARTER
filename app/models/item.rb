@@ -25,6 +25,6 @@ class Item < ApplicationRecord
   end
 
   def has_accepted_offer?
-    Offering.find_by(posted: self, status: 1)
+    Offering.find_by(posted: self, status: 1) || Offering.find_by(posted: self, status: 3)
   end
 end
