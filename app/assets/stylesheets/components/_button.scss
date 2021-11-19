@@ -32,20 +32,21 @@
 //create button @index
 
 .button {
-  background-color: #c4cbce;
+  background-color: $yellow;
   border: none;
   color: black;
-  padding: 16px 32px;
+  padding: 10px 16px;
   text-align: center;
-  font-size: 16px;
+  font-size: 14px;
   margin: 4px 2px;
   opacity: 1;
-  transition: 0.3s;
+  transition: 0.15s;
   text-decoration: none;
   margin-left: 75%;
-  border-radius: 4px;
+  border-radius: 2px;
   max-width: 200px;
 }
+
 .button:hover{
   opacity: 0.6;
   text-decoration: none;
