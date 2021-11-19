@@ -8,8 +8,5 @@ export default class extends Controller {
 
   confirm() {
     confirm("Items exchanged?");
-    document.reload()
-    document.getElementsById("home-tab").selected = false;
-    document.getElementsById('exchange-tab').selected = true;
   }
 }
