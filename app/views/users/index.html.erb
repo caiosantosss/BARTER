@@ -72,7 +72,7 @@
         <% end %>
         <%# Status changed (status on offerings)%>
         <% if pending.count != 0%>
-          <p>- <strong><%= pending.count %></strong> pending offers</p>
+          <p><strong><%= pending.count %></strong> pending offers</p>
         <% else %>
           <p>You have no pending offer!</p>
         <% end %>
@@ -83,10 +83,11 @@
         <% if accepted_items.count != 0 %>
           <p>Most recent upcoming exchange:</p>
           <div class="status-card-container">
-            <div class="card-photo"><%= cl_image_tag accepted_items.first.photo.key, height: 200, width: 300, crop: :fill %></div>
-            <div class="card-content">
-              <p><%= accepted_items.first.name %></p>
-              <p><%= accepted_items.first.description %></p>
+            <div class="card-photo"><%= cl_image_tag accepted_items.first.photo.key, height: 200, width: 300, crop: :fill %>
+              <div class="card-content">
+                <p><%= accepted_items.first.name %></p>
+                <p><%= accepted_items.first.description %></p>
+              </div>
             </div>
           </div>
         <% else %>
@@ -100,54 +101,65 @@
           <% end %>
         <% end %>
         <p>You have <%= pending_items.count %> pending items</p>
+        <div class="card-photo"><%= cl_image_tag pending_items.first.photo.key, height: 200, width: 300, crop: :fill %></div>
+        <div class="card-photo"><%= cl_image_tag pending_items.second.photo.key, height: 200, width: 300, crop: :fill %></div>
+        <div class="card-photo"><%= cl_image_tag pending_items.third.photo.key, height: 200, width: 300, crop: :fill %></div>
+        <% if pending_items.count > 4 %>
+          <%= link_to "Show more", "#", class: "btn btn-info"  %>
+        <% end %>
       </div>
     </div>
   </div>
   <%# Until here %>
   <div class="tab-pane fade py-3" id="offers" role="tabpanel" aria-labelledby="offer-tab">
     <div class="pending-offer-body">
-        <% if pending.count != 0 %>
-          <div class="pending-card-container">
-            <div><h4>Your Pending Offers:</h4></div>
-            <% pending.each do |user_item| %>
-              <div class="pending-offer-card">
-                <div class="posted-item-card">
-                  <% pending_posted_item = @offerings.map do |offering| %>
-                    <% offering.posted if user_item == offering.offered %>
-                  <% end.compact.first%>
-                  <div class="card-photo"><p>Item interested:</p>
-                    <% if pending_posted_item.photo.attached? %>
-                      <%= link_to item_path(pending_posted_item) do%>
-                        <%= cl_image_tag(pending_posted_item.photo.key)%>
-                      <% end %>
+      <% if pending.count != 0 %>
+        <div class="pending-card-container">
+          <div>
+            <h4>Your Pending Offers:</h4>
+          </div>
+          <% pending.each do |user_item| %>
+            <div class="pending-offer-card">
+              <div class="posted-item-card">
+                <% pending_posted_item = @offerings.map do |offering| %>
+                  <% offering.posted if user_item == offering.offered %>
+                <% end.compact.first%>
+                <div class="card-photo">
+                  <p>Item interested:</p>
+                  <% if pending_posted_item.photo.attached? %>
+                    <%= link_to item_path(pending_posted_item) do%>
+                      <%= cl_image_tag(pending_posted_item.photo.key)%>
                     <% end %>
-                  </div>
-                  <div class="card-content">
-                    <p><%= link_to pending_posted_item.name.capitalize, item_path(pending_posted_item)%></p>
-                    <div class="text"><p>Owner: <%= pending_posted_item.user.name %></p></div>
-                  </div>
+                  <% end %>
                 </div>
-                <div class='arrow'><i class="fas fa-arrow-left"></i></div>
-                <div class="offered-item-card">
-                  <div class="card-photo">
-                    <p>Your offer:</p>
-                    <% if user_item.photo.attached? %>
-                      <%= link_to item_path(user_item) do%>
-                        <%= cl_image_tag(user_item.photo.key)%>
-                      <% end %>
-                    <% end %>
-                  </div>
-                  <div class="card-content">
-                    <p><%= link_to user_item.name.capitalize, item_path(user_item)%></p>
-                    <p class='booking-tag'>pending</p>
+                <div class="card-content">
+                  <p><%= link_to pending_posted_item.name.capitalize, item_path(pending_posted_item)%></p>
+                  <div class="text">
+                    <p>Owner: <%= pending_posted_item.user.name %></p>
                   </div>
                 </div>
               </div>
-            <% end %>
-          </div>
-        <% else %>
-          <p>You have no pending offer!</p>
-        <% end %>
+              <div class='arrow'><i class="fas fa-arrow-left"></i></div>
+              <div class="offered-item-card">
+                <div class="card-photo">
+                  <p>Your offer:</p>
+                  <% if user_item.photo.attached? %>
+                    <%= link_to item_path(user_item) do%>
+                      <%= cl_image_tag(user_item.photo.key)%>
+                    <% end %>
+                  <% end %>
+                </div>
+                <div class="card-content">
+                  <p><%= link_to user_item.name.capitalize, item_path(user_item)%></p>
+                  <p class='booking-tag'>pending</p>
+                </div>
+              </div>
+            </div>
+          <% end %>
+        </div>
+      <% else %>
+        <p>You have no pending offer!</p>
+      <% end %>
     </div>
   </div>
   <div class="tab-pane fade py-3" id="items" role="tabpanel" aria-labelledby="item-tab">
@@ -172,83 +184,95 @@
   </div>
   <div class="tab-pane fade py-3" id="exchanges" role="tabpanel" aria-labelledby="exchange-tab">
     <div class="pending-offer-body">
-        <% if accepted_items.count != 0%>
-          <div class="pending-card-container">
-            <h4>Your upcoming exchanges:</h4>
+      <% if accepted_items.count != 0%>
+        <div class="pending-card-container">
+          <h4>Your upcoming exchanges:</h4>
           <%# !ADD SORT BY DATE  %>
-            <% accepted_items.each do |user_item| %>
-              <div class="pending-offer-card">
-                <div class="offered-item-card">
-                  <div class="card-photo"><p>Your offer:</p><%= cl_image_tag(user_item.photo.key) %></div>
-                  <div class="card-content">
-                    <p><%= user_item.name.capitalize %></p>
+          <% accepted_items.each do |user_item| %>
+            <div class="pending-offer-card">
+              <div class="offered-item-card">
+                <div class="card-photo">
+                  <p>Your offer:</p>
+                  <%= cl_image_tag(user_item.photo.key) %></div>
+                <div class="card-content">
+                  <p><%= user_item.name.capitalize %></p>
+                </div>
+              </div>
+              <div class="arrow">
+                <% offering = Offering.find_by(posted: user_item) ?  Offering.find_by(posted: user_item) : Offering.find_by(offered: user_item) %>
+                <div data-controller='alarm'>
+                  <div class="form" data-alarm-target= 'form' data-action='click->alarm#confirm'>
+                    <%= form_for offering do |t| %>
+                      <%= t.hidden_field :status, value: 'exchanged' %>
+                      <%= t.submit "Exchanged?", class: ' btn btn-primary' %>
+                    <% end %>
                   </div>
                 </div>
-                <div class="arrow">
-                  <% offering = Offering.find_by(posted: user_item) ?  Offering.find_by(posted: user_item) : Offering.find_by(offered: user_item) %>
-                  <div data-controller='alarm'>
-                    <div class="form" data-alarm-target= 'form' data-action='click->alarm#confirm'>
-                      <%= form_for offering do |t| %>
-                        <%= t.hidden_field :status, value: 'exchanged' %>
-                        <%= t.submit "Exchanged?", class: ' btn btn-primary' %>
-                      <% end %>
-                    </div>
+                <%# <i class="fas fa-arrows-alt-h"></i> %>
+              </div>
+              <div class="posted-item-card">
+                <% accepted_corresponding_item = @offerings.map do |offering| %>
+                  <% user_item == offering.offered ? offering.posted : offering.offered%>
+                <% end.compact.first%>
+                <div class="card-photo">
+                  <p><%=accepted_corresponding_item.user.name%>'s offer:</p>
+                  <%= cl_image_tag(accepted_corresponding_item.photo.key) %></div>
+                <div class="card-content">
+                  <p><%= accepted_corresponding_item.name.capitalize %></p>
+                  <div class="text">
+                    <p>Owner: <%= accepted_corresponding_item.user.name %></p>
                   </div>
-                  <%# <i class="fas fa-arrows-alt-h"></i> %>
-                </div>
-                <div class="posted-item-card">
-                  <% accepted_corresponding_item = @offerings.map do |offering| %>
-                    <% user_item == offering.offered ? offering.posted : offering.offered%>
-                  <% end.compact.first%>
-                  <div class="card-photo"><p><%=accepted_corresponding_item.user.name%>'s offer:</p><%= cl_image_tag(accepted_corresponding_item.photo.key) %></div>
-                  <div class="card-content">
-                    <p><%= accepted_corresponding_item.name.capitalize %></p>
-                    <div class="text"><p>Owner: <%= accepted_corresponding_item.user.name %></p></div>
-                    <div class="text"><p>Phone Number: <%= accepted_corresponding_item.user.phone_number %></p></div>
+                  <div class="text">
+                    <p>Phone Number: <%= accepted_corresponding_item.user.phone_number %></p>
                   </div>
                 </div>
               </div>
-            <% end %>
-          </div>
-        <% else %>
-          <p>You have no upcoming exchange!</p>
-        <% end %>
+            </div>
+          <% end %>
+        </div>
+      <% else %>
+        <p>You have no upcoming exchange!</p>
+      <% end %>
     </div>
     <div class="pending-offer-body">
-        <% if exchanged.count != 0%>
-          <div class="pending-card-container">
-            <h4>Past exchanges:</h4>
+      <% if exchanged.count != 0%>
+        <div class="pending-card-container">
+          <h4>Past exchanges:</h4>
           <%# !ADD SORT BY DATE  %>
-            <% exchanged.each do |user_item| %>
-              <div class="pending-offer-card">
-                <%# Time and Location  %>
-                <div class="offered-item-card">
-                  <div class="card-photo"><%= cl_image_tag(user_item.photo.key)%></div>
-                  <div class="card-content">
-                    <p><%= user_item.name.capitalize %></p>
-                  </div>
+          <% exchanged.each do |user_item| %>
+            <div class="pending-offer-card">
+              <%# Time and Location  %>
+              <div class="offered-item-card">
+                <div class="card-photo"><%= cl_image_tag(user_item.photo.key)%></div>
+                <div class="card-content">
+                  <p><%= user_item.name.capitalize %></p>
                 </div>
-                <div class="arrow"><i class="fas fa-arrows-alt-h"></i></div>
-                <div class="posted-item-card">
-                  <% accepted_corresponding_item = @offerings.map do |offering| %>
-                    <% user_item == offering.offered ? offering.posted : offering.offered%>
-                  <% end.compact.first%>
-                  <div class="card-photo">
-                    <%= cl_image_tag(accepted_corresponding_item.photo.key) %>
+              </div>
+              <div class="arrow"><i class="fas fa-arrows-alt-h"></i></div>
+              <div class="posted-item-card">
+                <% accepted_corresponding_item = @offerings.map do |offering| %>
+                  <% user_item == offering.offered ? offering.posted : offering.offered%>
+                <% end.compact.first%>
+                <div class="card-photo">
+                  <%= cl_image_tag(accepted_corresponding_item.photo.key) %>
+                </div>
+                <div class="card-content">
+                  <p><%= accepted_corresponding_item.name.capitalize %></p>
+                  <div class="text">
+                    <p>Owner: <%= accepted_corresponding_item.user.name %></p>
                   </div>
-                  <div class="card-content">
-                    <p><%= accepted_corresponding_item.name.capitalize %></p>
-                    <div class="text"><p>Owner: <%= accepted_corresponding_item.user.name %></p></div>
-                    <div class="text"><p>Phone Number: <%= accepted_corresponding_item.user.phone_number %></p></div>
+                  <div class="text">
+                    <p>Phone Number: <%= accepted_corresponding_item.user.phone_number %></p>
                   </div>
                 </div>
               </div>
-            <% end %>
-          </div>
-        <% else %>
-          <p>Past exchanges:</p>
-          <p>No exchanges have been made so far!</p>
-        <% end %>
+            </div>
+          <% end %>
+        </div>
+      <% else %>
+        <p>Past exchanges:</p>
+        <p>No exchanges have been made so far!</p>
+      <% end %>
     </div>
   </div>
 </div>
