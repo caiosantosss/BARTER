@@ -18,6 +18,7 @@
 <% accepted_offers = @user.sent_offers.accepted %>
 <% rejected_offers = @user.sent_offers.rejected %>
 <% pending = @user.sent_offers.pending%>
+<% pending_items = pending.map {|offering| offering.offered} %>
 
 <div class="tab-content" id="myTabContent">
   <div class="tab-pane fade py-3 <%='show active' if params[:tab] == 'home' ||  params[:tab].blank? %>" id="home" role="tabpanel" aria-labelledby="home-tab">
@@ -65,8 +66,8 @@
 
         <p>You have <%= pending.count %> pending items</p>
 
-       
-        <%= render 'pending_items', pending: pending %>
+
+        <%= render 'pending_items', pending_items: pending_items %>
 
       </div>
     </div>
