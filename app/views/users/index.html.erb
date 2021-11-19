@@ -65,7 +65,7 @@
       <div class="status-card">
         <% if pending.count != 0 %>
           <p>You have <%= pending.count %> pending items</p>
-          <%= render 'pending_items', pending_items: pending_items %>
+          <%# render 'pending_items', pending_items: pending_items %>
         <% else %>
           <p>You have no pending items</p>
         <% end %>
@@ -189,7 +189,8 @@
           <% end %>
         </div>
       <% else %>
-        <p>You have no upcoming exchange!</p>
+        <div class="title"><h4>Your upcoming exchanges:</h4></div>
+        <div class="statement"><p>You have no upcoming exchange!</p></div>
       <% end %>
     </div>
     <div class="pending-offer-body">
