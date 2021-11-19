@@ -23,4 +23,8 @@ class Item < ApplicationRecord
   def offered_offerings
     Offering.where(posted: self)
   end
+
+  def has_accepted_offer?
+    Offering.find_by(posted: self, status: 1)
+  end
 end
