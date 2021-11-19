@@ -89,8 +89,13 @@
       padding: 20px;
       border-bottom: 1px solid rgb(207, 205, 205);
       .arrow {
-        font-size: 30px;
         align-self: center;
+        i {
+          font-size: 30px;
+        }
+        .form {
+          font-size: 12px;
+        }
       }
       .posted-item-card, .offered-item-card {
         // display: flex;
