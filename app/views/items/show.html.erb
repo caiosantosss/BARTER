@@ -9,7 +9,7 @@
         </div>
       </div>
     </div>
-    <% if user_signed_in? && @item.user != current_user %>
+    <% if user_signed_in? && @item.user != current_user && !@item.has_accepted_offer? %>
       <div class="form px-5 d-flex justify-content-center w-100 row">
         <%= simple_form_for [@item, @offering] do |f| %>
           <%= f.association :offered, label: 'Your items to offer',
@@ -24,6 +24,8 @@
       </div>
     <% elsif !user_signed_in? %>
       <div class="button-sign-in m-5 px-5 d-flex justify-content-center align-self-center w-100"><%= link_to "Sign in to offer",  new_user_session_path %></div>
+    <% elsif @item.has_accepted_offer? %>
+      <div class="m-5 px-5 d-flex justify-content-center align-self-center w-100">This item has already been exchanged</div>
     <% else %>
       <div class="m-5 px-5 d-flex justify-content-center align-self-center w-100">You can't offer your own item</div>
     <% end %>
@@ -50,16 +52,16 @@
           <div class="d-flex">
             <% if policy(offering).accept_or_reject? && offering.pending? %>
               <div>
-              <%= simple_form_for offering do |f| %>
-                <%= f.input :status, as: :hidden, input_html: { value: 'accepted'} %>
-                <%= f.submit 'Accept', class: 'btn btn-success m-3' %>
-              <% end %>
+                <%= simple_form_for offering do |f| %>
+                  <%= f.input :status, as: :hidden, input_html: { value: 'accepted'} %>
+                  <%= f.submit 'Accept', class: 'btn btn-success m-3' %>
+                <% end %>
               </div>
               <div>
-              <%= simple_form_for offering do |f| %>
-                <%= f.input :status, as: :hidden, input_html: { value: 'rejected'} %>
-                <%= f.submit 'Reject', class: 'btn btn-danger m-3' %>
-              <% end %>
+                <%= simple_form_for offering do |f| %>
+                  <%= f.input :status, as: :hidden, input_html: { value: 'rejected'} %>
+                  <%= f.submit 'Reject', class: 'btn btn-danger m-3' %>
+                <% end %>
               </div>
             <% else %>
               <p class='booking-tag'><%= offering.status %></p>
