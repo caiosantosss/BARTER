@@ -1,6 +1,7 @@
 class Item < ApplicationRecord
   belongs_to :user
-  # has_many :offerings (this doesnt work)
+  has_many :sent_offers, class_name: 'Offering', foreign_key: :offered_id
+  has_many :received_offers, class_name: 'Offering', foreign_key: :posted_id
   has_one_attached :photo
 
   include PgSearch::Model
