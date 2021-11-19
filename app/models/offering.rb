@@ -11,6 +11,9 @@ class Offering < ApplicationRecord
   end
 
   def reject_others
-    Offering.where(posted: self.posted).where.not(id: self).update_all(status: 'rejected')
+    # this could be one statement
+    Offering.where(posted: self.posted).where.not(id: self).update_all(status: 'rejected') # rejects all offerings for this posting
+    Offering.where(posted: self.offered).where.not(id: self).update_all(status: 'rejected') # rejects all posting what was offered
+    Offering.where(offered: self.offered).where.not(id: self).update_all(status: 'rejected') # rejects all offerings what was offered
   end
 end
