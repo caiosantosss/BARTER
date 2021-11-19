@@ -147,7 +147,7 @@
             <% end %>
           </div>
         <% else %>
-          <p>You have no pending offer!</p>
+          <div class='statement'><p>You have no pending offer!</p></div>
         <% end %>
     </div>
   </div>
@@ -176,7 +176,7 @@
         <% if accepted_items.count != 0%>
           <div class="pending-card-container">
             <h4>Your upcoming exchanges:</h4>
-          <%# !ADD SORT BY DATE  %>
+            <%# !ADD SORT BY DATE  %>
             <% accepted_items.each do |user_item| %>
               <div class="pending-offer-card">
                 <div class="offered-item-card">
@@ -212,7 +212,8 @@
             <% end %>
           </div>
         <% else %>
-          <p>You have no upcoming exchange!</p>
+          <div class="title"><h4>Your upcoming exchanges:</h4></div>
+          <div class='statement'><p>You have no upcoming exchange!</p></div>
         <% end %>
     </div>
     <div class="pending-offer-body">
@@ -248,7 +249,7 @@
           </div>
         <% else %>
           <p>Past exchanges:</p>
-          <p>No exchanges have been made so far!</p>
+          <div class='statement'><p>No exchanges have been made so far!</p></div>
         <% end %>
     </div>
   </div>
