@@ -186,11 +186,13 @@
                 </div>
                 <div class="arrow">
                   <% offering = Offering.find_by(posted: user_item) ?  Offering.find_by(posted: user_item) : Offering.find_by(offered: user_item) %>
-                  <div class="form">
-                    <%= form_for offering do |t| %>
-                      <%= t.hidden_field :status, value: 'exchanged' %>
-                      <%= t.submit "Exchanged?", class: ' btn btn-primary' %>
-                    <% end %>
+                  <div data-controller='alarm'>
+                    <div class="form" data-alarm-target= 'form' data-action='click->alarm#confirm'>
+                      <%= form_for offering do |t| %>
+                        <%= t.hidden_field :status, value: 'exchanged' %>
+                        <%= t.submit "Exchanged?", class: ' btn btn-primary' %>
+                      <% end %>
+                    </div>
                   </div>
                   <%# <i class="fas fa-arrows-alt-h"></i> %>
                 </div>
