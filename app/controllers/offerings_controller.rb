@@ -40,9 +40,14 @@ class OfferingsController < ApplicationController
     @offering = Offering.find(params[:id])
     authorize @offering
     if @offering.update(offering_params)
+      @offering.reject_others if @offering.accepted?
       query_params = {}
-      query_params[:tab] = 'exchanges' if @offering.exchanged?
-      redirect_to dashboard_path query_params
+      if @offering.exchanged? || @offering.accepted?
+        query_params[:tab] = 'exchanges'
+        redirect_to dashboard_path query_params
+      elsif @offering.rejected?
+        redirect_to item_path(Item.find(@offering.posted_id))
+      end
     else
       render 'items/show'
     end
