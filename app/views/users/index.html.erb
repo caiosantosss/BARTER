@@ -63,12 +63,12 @@
         <% end %>
       </div>
       <div class="status-card">
-
-        <p>You have <%= pending.count %> pending items</p>
-
-
-        <%= render 'pending_items', pending_items: pending_items %>
-
+        <% if pending.count != 0 %>
+          <p>You have <%= pending.count %> pending items</p>
+          <%= render 'pending_items', pending_items: pending_items %>
+        <% else %>
+          <p>You have no pending items</p>
+        <% end %>
       </div>
     </div>
   </div>
