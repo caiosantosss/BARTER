@@ -1,12 +1,11 @@
-
-
 .info-container {
   display: flex;
   justify-content: space-around;
+  margin-top: 3em;
   .info-card {
      -moz-border-radius: 6px;
      -webkit-border-radius: 6px;
-     background-color: #c4cbce;
+     background-color: #f6f7f7;
      background-position: 9px 0px;
      background-repeat: no-repeat;
      border: solid 1px #6f7477;
@@ -14,7 +13,6 @@
      line-height: 18px;
      overflow: hidden;
      padding: 15px 60px;
-       box-shadow: 10px 10px 8px 10px #888888;
   }
   p{
     margin-top: 8px;
@@ -24,7 +22,7 @@
 }
 
 .status-container {
-  margin: 20px;
+  margin: 20px 0;
   display: flex;
   justify-content: space-around;
   .status-card{
@@ -33,8 +31,6 @@
       display: flex;
       .card-photo{
         position: relative;
-        width: 1200px;
-        display: grid;
         grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
         gap: 20px;
         padding: 20px;
@@ -45,20 +41,22 @@
       }
     }
      p{
-       box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
        max-width: 300px;
        margin: auto;
        text-align: center;
        font-family: arial;
        padding: 4px;
        transition: 1s;
-         box-shadow: 10px 10px 8px 10px #888888;
       }
       p:hover{
         background-color: rgb(209, 220, 223);
 
       }
   }
+}
+
+.user-pending-items {
+  padding: 4px;
 }
 
 .pending-offer-body {
