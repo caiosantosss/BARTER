@@ -101,12 +101,8 @@
           <% end %>
         <% end %>
         <p>You have <%= pending_items.count %> pending items</p>
-        <div class="card-photo"><%= cl_image_tag pending_items.first.photo.key, height: 200, width: 300, crop: :fill %></div>
-        <div class="card-photo"><%= cl_image_tag pending_items.second.photo.key, height: 200, width: 300, crop: :fill %></div>
-        <div class="card-photo"><%= cl_image_tag pending_items.third.photo.key, height: 200, width: 300, crop: :fill %></div>
-        <% if pending_items.count > 4 %>
-          <%= link_to "Show more", "#", class: "btn btn-info"  %>
-        <% end %>
+        <hr>
+        <%= render 'pending_items', pending_items: pending_items %>
       </div>
     </div>
   </div>
